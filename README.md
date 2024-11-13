@@ -1,4 +1,4 @@
-##PROJECT PREVIEW (V.0)
+## PROJECT PREVIEW (V.0)
 ![image](https://github.com/user-attachments/assets/266b0f09-7aea-436c-9861-ada667db2985)
 
 # Getting Started with Create React App
