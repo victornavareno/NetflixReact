@@ -1,13 +1,11 @@
 // src/components/ContentList.js
 import React, { useEffect, useState } from 'react';
 import { getAllContents } from '../services/api';
-import '../styles/ContentList.css'; // Import a CSS file for styling the boxes
+import { useNavigate } from 'react-router-dom';
 
-// aqui lo que estoy haciendo es cargar todos los contenidos que tengo en la base de datos
-// TODO: IMPLEMENTAR ESTO PERO CON MICROSERVICIO VISTAS 
-// (VISTAS PUEDE ENVIAR UN ARRAY DE CONTENIDOS?)
 function ContentList() {
     const [contents, setContents] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         async function fetchData() {
@@ -17,18 +15,34 @@ function ContentList() {
         fetchData();
     }, []);
 
+    const handleContentClick = (id) => {
+        navigate(`/content/${id}`);
+    };
+
     return (
         <div>
             <h1>Contenidos</h1>
-            <div className="content-list">
-                {contents.map(content => (
-                    <div className="content-box" key={content.idContenido}>
-                        <div className="content-image">
-                            <img src={content.imageURL} alt={content.titulo} />
-                        </div>
-                        <div className="content-info">
-                            <h2>{content.titulo}</h2>
-                            <p>{content.description}</p>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
+                {contents.map((content) => (
+                    <div
+                        key={content.idContenido}
+                        onClick={() => handleContentClick(content.idContenido)}
+                        style={{
+                            width: '200px',
+                            height: '300px',
+                            border: '1px solid #ccc',
+                            borderRadius: '8px',
+                            overflow: 'hidden',
+                            cursor: 'pointer',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'space-between',
+                        }}
+                    >
+                        <div style={{ height: '60%', backgroundSize: 'cover', backgroundPosition: 'center', backgroundImage: `url(${content.imagen})` }}></div>
+                        <div style={{ padding: '10px' }}>
+                            <h3 style={{ margin: '0' }}>{content.titulo}</h3>
+                            <p style={{ fontSize: '0.9em', color: '#666' }}>{content.sinopsis}</p>
                         </div>
                     </div>
                 ))}

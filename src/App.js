@@ -1,18 +1,20 @@
 // src/App.js
-// TEST COMMIT
 import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import ContentList from './components/ContentList';
 import ContentDetail from './components/ContentDetail';
 
 function App() {
-  return (
-      <div className="App">
+    return (
+      
+        <Router>
           <h1>NETFLIX</h1>
-          <ContentList />
-          {/* Prueba con un ID específico para ver el detalle */}
-          <ContentDetail id={1} /> 
-      </div>
-  );
+            <Routes>
+                <Route path="/" element={<ContentList />} />
+                <Route path="/content/:id" element={<ContentDetail />} />
+            </Routes>
+        </Router>
+    );
 }
 
 export default App;
