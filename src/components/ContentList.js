@@ -1,7 +1,11 @@
 // src/components/ContentList.js
 import React, { useEffect, useState } from 'react';
 import { getAllContents } from '../services/api';
+import '../styles/ContentList.css'; // Import a CSS file for styling the boxes
 
+// aqui lo que estoy haciendo es cargar todos los contenidos que tengo en la base de datos
+// TODO: IMPLEMENTAR ESTO PERO CON MICROSERVICIO VISTAS 
+// (VISTAS PUEDE ENVIAR UN ARRAY DE CONTENIDOS?)
 function ContentList() {
     const [contents, setContents] = useState([]);
 
@@ -16,13 +20,19 @@ function ContentList() {
     return (
         <div>
             <h1>Contenidos</h1>
-            <ul>
+            <div className="content-list">
                 {contents.map(content => (
-                    <li key={content.idContenido}>
-                        {content.titulo} - {content.tipo}
-                    </li>
+                    <div className="content-box" key={content.idContenido}>
+                        <div className="content-image">
+                            <img src={content.imageURL} alt={content.titulo} />
+                        </div>
+                        <div className="content-info">
+                            <h2>{content.titulo}</h2>
+                            <p>{content.description}</p>
+                        </div>
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 }

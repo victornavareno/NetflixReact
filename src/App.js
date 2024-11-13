@@ -7,7 +7,7 @@ import ContentDetail from './components/ContentDetail';
 function App() {
   return (
       <div className="App">
-          <h1>Aplicación de Contenidos</h1>
+          <h1>NETFLIX</h1>
           <ContentList />
           {/* Prueba con un ID específico para ver el detalle */}
           <ContentDetail id={1} /> 
