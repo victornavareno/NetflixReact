@@ -1,24 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from 'react';
+import ContentList from './components/ContentList';
+import ContentDetail from './components/ContentDetail';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+          <h1>Aplicación de Contenidos</h1>
+          <ContentList />
+          {/* Prueba con un ID específico para ver el detalle */}
+          <ContentDetail id={1} /> 
+      </div>
   );
 }
 
