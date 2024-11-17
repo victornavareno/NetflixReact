@@ -1,0 +1,16 @@
+.vista {
+    margin-bottom: 2rem;
+  }
+  
+  .vista h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: #ffffff;
+  }
+  
+  .contenidos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  

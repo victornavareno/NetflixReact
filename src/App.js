@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./App.css"; // Import global styles
+import Vista from "./components/Vista";
+import "./styles/App.css";
 
 function App() {
+  document.title = "NETFLIX";
   const [vistas, setVistas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -10,32 +12,26 @@ function App() {
   useEffect(() => {
     // Llamar al endpoint para obtener las vistas
     axios
-      .get("http://127.0.0.1:8082/vista") // Cambia esta URL si el puerto o dominio varían
+      .get("http://127.0.0.1:8082/vista")
       .then((response) => {
-        setVistas(response.data); // Guardar las vistas en el estado
-        setLoading(false); // Cambiar el estado de carga
+        setVistas(response.data);
+        setLoading(false);
       })
       .catch((err) => {
-        setError(err.message); // Manejar errores
+        setError(err.message);
         setLoading(false);
       });
   }, []);
 
-  // Mostrar mientras se cargan las vistas o si ocurre un error
-  // if (loading) return <p>Cargando vistas...</p>;
-  // if (error) return <p>Error al cargar vistas: {error}</p>;
+  if (loading) return <p>Cargando vistas...</p>;
+  if (error) return <p>Error al cargar vistas: {error}</p>;
 
   return (
     <div>
       <h1>NETFLIX</h1>
-      <h2>Bienvenido de nuevo, (usuario)</h2>
-      <div className="vistas">
-        {vistas.map((vista) => (
-          <div key={vista.id_vista} className="vista-item">
-            <h2>{vista.nombre_vista}</h2>
-          </div>
-        ))}
-      </div>
+      {vistas.map((vista) => (
+        <Vista key={vista.id_vista} vista={vista} />
+      ))}
     </div>
   );
 }
