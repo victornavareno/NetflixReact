@@ -7,7 +7,8 @@ function ContenidoList({ vistaId, onContenidoSelect }) {
   useEffect(() => {
     if (vistaId) {
       // Cargar los contenidos asociados a la vista seleccionada
-      axios.get(`/vista/${vistaId}`) // Cambiar a la ruta real del backend
+      axios
+        .get(`/vista/${vistaId}`) // Cambiar a la ruta real del backend
         .then((response) => setContenidos(response.data.contenidos))
         .catch((error) => console.error("Error fetching contenidos:", error));
     }
@@ -20,13 +21,29 @@ function ContenidoList({ vistaId, onContenidoSelect }) {
   return (
     <div>
       <h2>Contenidos</h2>
-      <ul>
+      <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
         {contenidos.map((contenido) => (
-          <li key={contenido.idcontenido} onClick={() => onContenidoSelect(contenido.idcontenido)}>
-            {contenido.titulo}
-          </li>
+          <div
+            key={contenido.idcontenido}
+            onClick={() => onContenidoSelect(contenido.idcontenido)}
+            style={{
+              border: "1px solid #ccc",
+              padding: "1rem",
+              borderRadius: "8px",
+              width: "200px",
+              textAlign: "center",
+              cursor: "pointer",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+              transition: "transform 0.2s",
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.transform = "scale(1.05)")}
+            onMouseLeave={(e) => (e.currentTarget.style.transform = "scale(1)")}
+          >
+            <h3>{contenido.titulo}</h3>
+            <p>{contenido.descripcion}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

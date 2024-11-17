@@ -13,7 +13,7 @@ function VistaList({ onVistaSelect }) {
 
   return (
     <div>
-      <h2>Vistas</h2>
+      <h2>Paco</h2>
       <ul>
         {vistas.map((vista) => (
           <li key={vista.id_vista} onClick={() => onVistaSelect(vista.id_vista)}>
