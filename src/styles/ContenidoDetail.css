@@ -35,14 +35,15 @@
     margin-top: 20px;
   }
   
-  .contenido-info h1 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-  }
-  
+.contenido-info h1,
+.contenido-info h2,
+.contenido-info p {
+  margin: 0px 0;
+}
+
   .contenido-info p {
     font-size: 1rem;
-    line-height: 1.5;
+    line-height: 1.3;
     margin: 5px 0;
   }
   
@@ -74,4 +75,30 @@
   .contenido-button.temporadas:hover {
     background-color: #b00710;
   }
+
+
+
+/* Estilos de superposición para mostrar el reproductor encima del contenido */
+.overlay {
+  position: fixed; /* Fija la superposición en la pantalla */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro con opacidad */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* Asegura que el reproductor esté por encima de todo */
+}
+
+.contenido-image img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+
+.contenido-actions {
+  margin-top: 20px;
+}
   
