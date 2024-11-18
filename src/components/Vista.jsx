@@ -76,7 +76,7 @@ function Vista({ vista }) {
           >
             {vista.contenidos.map((contenido, index) => (
               <div
-                key={contenido.idcontenido}
+                key={contenido.id_contenido}
                 className="carousel-item"
                 style={{ flex: `0 0 calc(100% / ${contenidosPorVista})` }}
               >

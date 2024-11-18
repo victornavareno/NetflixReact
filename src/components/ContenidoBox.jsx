@@ -6,7 +6,7 @@ function ContenidoBox({ contenido }) {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
-    navigate(`/contenido/${contenido.idcontenido}`, { state: { contenido } });
+    navigate(`/contenido/${contenido.id_contenido}`, { state: { contenido } });
   };
 
   return (
