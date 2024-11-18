@@ -3,6 +3,7 @@ import axios from "axios";
 import Vista from "./components/Vista";
 import "./styles/App.css";
 import Contenido from "./components/ContenidoDetail";
+import Reproductor from "./components/Reproductor";
 import ContenidoDetail from "./components/ContenidoDetail";
 
 // function App() {
@@ -69,8 +70,10 @@ function App() {
   return (
     <div className="App">
       // Test both cases:
-      <Contenido contenido={mockContenidoSerie} />;
-      <Contenido contenido={mockContenidoPelicula} />;{/* <Contenido /> */}
+      <Contenido contenido={mockContenidoSerie} />
+      :
+      <Contenido contenido={mockContenidoPelicula} />:{/* <Contenido /> */}
+      <Reproductor contenido={mockContenidoSerie} />
     </div>
   );
 }

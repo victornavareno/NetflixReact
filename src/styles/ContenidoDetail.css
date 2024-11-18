@@ -22,14 +22,14 @@
     margin: 5%;
     margin-top: 10px;
     margin-bottom: 0px;
-    color: rgb(190, 190, 190);
+    color: rgb(255, 255, 255);
   }
   .contenido h2{
     font-size: 40px !important; /* sobreescribe el tamaño de la fuente */
     margin: 5%;
     margin-top: 0px;
     margin-bottom: 10px;
-    color: rgb(255, 255, 255);
+    color: rgb(190, 190, 190);
   }
   .contenido-info {
     margin-top: 20px;
