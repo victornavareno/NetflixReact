@@ -29,8 +29,9 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <div className="background">
         <h1>NETFLIX</h1>
+        <h2>Bienvenido de nuevo, USUARIO</h2>
         <Routes>
           <Route
             path="/"
