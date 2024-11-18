@@ -1,4 +1,5 @@
 .contenido-box {
+    height: 160px;
     display: flex;
     flex-direction: column;
     border: 1px solid #ccc;
@@ -11,27 +12,33 @@
   
   .contenido-box:hover {
     transform: scale(1.05);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 10px rgba(0, 0, 1, 0.41);
   }
   
   .contenido-image img {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
+    height: 75px;
+    object-fit:cover;
+    /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #393939 100%); */
+
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.365);
   }
   
   .contenido-info {
-    padding: 1rem;
-  }
-  
-  .contenido-title {
+    padding: 10px; /* Añadimos espacio alrededor del contenido */
+    padding-top: 0;
+    text-align: left; /* Aseguramos alineación a la izquierda */
+}
+
+.contenido-title {
     font-size: 1.1rem;
     font-weight: bold;
-    margin-bottom: 0.5rem;
-  }
-  
-  .contenido-sinopsis {
+    margin: 5px 0; /* Separación entre título y sinopsis */
+    color: #fff; /* Texto más visible */
+}
+
+.contenido-sinopsis {
     font-size: 0.9rem;
-    color: #666;
-  }
-  
+    color: #aaa; /* Texto más tenue */
+    margin: 0; /* Ajustamos márgenes */
+}

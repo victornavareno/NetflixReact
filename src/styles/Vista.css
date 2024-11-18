@@ -1,16 +1,51 @@
 .vista {
-    margin-bottom: 2rem;
-  }
-  
-  .vista h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: #ffffff;
-  }
-  
-  .contenidos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
-  }
-  
+  text-align: left;
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel {
+  display: grid;
+  width: 100%;
+  overflow: hidden;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+
+.carousel-item {
+  flex: 0 0 30%; /* Ocupa 1/5 del ancho total */
+  width: 80px;
+  box-sizing: border-box;
+  padding: 10px; /* Opcional: Añade espacio entre los items */
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1;
+}
+
+.carousel-button.prev {
+  left: 10px;
+}
+
+.carousel-button.next {
+  right: 10px;
+}
+
+
