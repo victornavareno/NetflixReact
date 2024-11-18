@@ -46,3 +46,32 @@
     margin: 5px 0;
   }
   
+  .contenido-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .contenido-button {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .contenido-button:hover {
+    background-color: #b00710;
+  }
+  
+  .contenido-button.temporadas {
+    background-color: #e50914;
+  }
+  
+  .contenido-button.temporadas:hover {
+    background-color: #b00710;
+  }
+  

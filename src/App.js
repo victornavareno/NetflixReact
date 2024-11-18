@@ -41,9 +41,36 @@ import ContenidoDetail from "./components/ContenidoDetail";
 
 // TRABAJANDO EN ContenidoDetail
 function App() {
+  const mockContenidoSerie = {
+    titulo: "Breaking Bad",
+    sinopsis:
+      "Un profesor de química se convierte en fabricante de metanfetaminas.",
+    director: "Vince Gilligan",
+    elenco: "Bryan Cranston, Aaron Paul",
+    duracion: 60,
+    genero: "Drama",
+    tipo: "Serie",
+    imagen: "breaking_bad.jpeg",
+    id_contenido: 1,
+  };
+
+  const mockContenidoPelicula = {
+    titulo: "El Camino",
+    sinopsis: "Un fugitivo busca redención en el desierto.",
+    director: "Vince Gilligan",
+    elenco: "Aaron Paul, Jesse Plemons",
+    duracion: 122,
+    genero: "Drama",
+    tipo: "Pelicula",
+    imagen: "el_camino.jpg",
+    id_contenido: 2,
+  };
+
   return (
     <div className="App">
-      <Contenido />
+      // Test both cases:
+      <Contenido contenido={mockContenidoSerie} />;
+      <Contenido contenido={mockContenidoPelicula} />;{/* <Contenido /> */}
     </div>
   );
 }

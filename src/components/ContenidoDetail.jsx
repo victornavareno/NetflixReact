@@ -1,38 +1,45 @@
 import React from "react";
-import "../styles/ContenidoDetail.css"; 
+import "../styles/ContenidoDetail.css";
 
-
-function ContenidoDetail({ contenido }) {
-  // Mock para pruebas (carga cuando el parametro input contenido es null)
-  const mockContenido = contenido || {
-    titulo: "Breaking Bad",
-    sinopsis: "Un profesor de química se convierte en fabricante de metanfetaminas.",
-    director: "Vince Gilligan",
-    elenco: "Bryan Cranston, Aaron Paul",
-    duracion: 60,
-    genero: "Drama",
-    tipo: "Serie",
-    imagen: "breaking_bad.jpeg",
-  };
+function Contenido({ contenido }) {
+  const isSerie = contenido.tipo.toLowerCase() === "serie";
 
   return (
     <div className="contenido">
       <div className="contenido-image">
-        <img src={`/assets/img/${mockContenido.imagen}`} alt={mockContenido.titulo} />
+        <img src={`/assets/img/${contenido.imagen}`} alt={contenido.titulo} />
       </div>
       <div className="contenido-info">
-      
-        <h1>{mockContenido.titulo} </h1>
-        <h2>{mockContenido.tipo}</h2>
-        <p><strong>Sinopsis:</strong> {mockContenido.sinopsis}</p>
-        <p><strong>Director:</strong> {mockContenido.director}</p>
-        <p><strong>Elenco:</strong> {mockContenido.elenco}</p>
-        <p><strong>Duración:</strong> {mockContenido.duracion} min</p>
-        <p><strong>Género:</strong> {mockContenido.genero}</p>
-        <p><strong>Tipo:</strong> {mockContenido.tipo}</p>
+      <h1>{contenido.titulo} </h1>
+        <h2>{contenido.tipo}</h2>
+        <p><strong>Sinopsis:</strong> {contenido.sinopsis}</p>
+        <p><strong>Director:</strong> {contenido.director}</p>
+        <p><strong>Elenco:</strong> {contenido.elenco}</p>
+        <p><strong>Duración:</strong> {contenido.duracion} min</p>
+        <p><strong>Género:</strong> {contenido.genero}</p>
+        <p><strong>Tipo:</strong> {contenido.tipo}</p>
+      </div>
+      <div className="contenido-actions">
+        {isSerie ? (
+          <button
+            className="contenido-button temporadas"
+            onClick={() => handleShowTemporadas(contenido.id_contenido)}
+          >
+            Ver Temporadas
+          </button>
+        ) : (
+          <button className="contenido-button play">Reproducir Contenido</button>
+        )}
       </div>
     </div>
   );
 }
 
-export default ContenidoDetail;
+function handleShowTemporadas(idContenido) {
+  // This function will handle navigation to the temporadas list.
+  console.log(`Navigate to temporadas of contenido ID: ${idContenido}`);
+  // Example: You can use a router to navigate to a new page.
+}
+
+export default Contenido;
+
