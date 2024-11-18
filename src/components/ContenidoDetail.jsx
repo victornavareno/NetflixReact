@@ -1,29 +1,38 @@
-import React, { useState } from "react";
+import React from "react";
+import { useLocation } from "react-router-dom";
 import "../styles/ContenidoDetail.css";
 import Reproductor from "./Reproductor";
 
-function Contenido({ contenido }) {
-  const [showReproductor, setShowReproductor] = useState(false); // Estado para mostrar el reproductor
+function ContenidoDetail() {
+  const { state } = useLocation();
+  const contenido = state?.contenido;
+
+  // Unconditionally define the state
+  const [showReproductor, setShowReproductor] = React.useState(false);
+
+  if (!contenido) {
+    // Render an error message if contenido is null
+    return <p>Error: No se encontró el contenido</p>;
+  }
+
   const isSerie = contenido.tipo.toLowerCase() === "serie";
 
-  // Mostramos el reproductor cuando pulsamos REPRODUCIR en el contenido q no sea serie
   const handleReproducir = () => {
     setShowReproductor(true);
   };
 
-  // Oculta el reproductor
   const handleCerrarReproductor = () => {
-    setShowReproductor(false); 
+    setShowReproductor(false);
   };
 
   return (
     <div className="contenido-container">
       <div className="contenido">
-        <div className="contenido-image">
+        <div className="contenido-detail-image">
           <img src={`/assets/img/${contenido.imagen}`} alt={contenido.titulo} />
         </div>
         <div className="contenido-info">
-          <h1>{contenido.titulo} </h1>
+          <h1>{contenido.titulo}</h1>
           <h2>{contenido.tipo}</h2>
           <p><strong>Sinopsis:</strong> {contenido.sinopsis}</p>
           <p><strong>Director:</strong> {contenido.director}</p>
@@ -36,7 +45,7 @@ function Contenido({ contenido }) {
           {isSerie ? (
             <button
               className="contenido-button temporadas"
-              onClick={() => handleShowTemporadas(contenido.id_contenido)}
+              onClick={() => handleShowTemporadas(contenido.idcontenido)}
             >
               Ver Temporadas
             </button>
@@ -48,7 +57,6 @@ function Contenido({ contenido }) {
         </div>
       </div>
 
-      {/* Mostrar el reproductor como superposición si showReproductor es verdadero */}
       {showReproductor && (
         <div className="overlay">
           <Reproductor contenido={contenido} onClose={handleCerrarReproductor} />
@@ -62,4 +70,4 @@ function handleShowTemporadas(idContenido) {
   console.log(`Navigate to temporadas of contenido ID: ${idContenido}`);
 }
 
-export default Contenido;
+export default ContenidoDetail;
