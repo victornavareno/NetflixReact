@@ -1,0 +1,72 @@
+/* Reproductor.css */
+.reproductor {
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 500px;
+    width: 1000px;
+    background-color: rgb(28, 28, 28);
+}
+  
+  .reproductor-thumbnail {
+    position: relative;
+    width: 80%;
+    height: 500px;
+
+  }
+  
+  .reproductor-thumbnail img {
+    width: 100%;
+    height: 100%;
+    display: fill;
+  }
+  
+  /* Style the play button */
+  .play-button {
+    height: 120px;
+    width: 120px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 90px;
+    cursor: pointer;
+    z-index: 10; /* Ensure it's above the image */
+  }
+  
+  .play-button:hover {
+    background-color: rgba(0, 0, 0, 0.7); /* Darken on hover */
+  }
+  
+  .play-button i {
+    font-size: 36px; /* Adjust size of the play icon */
+  }
+
+  /* Botón de cerrar el reproductor */
+.close-button {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  background-color: rgb(255, 255, 255);
+  color: rgb(35, 35, 35);
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  z-index: 10000; /* Asegúrate de que esté encima del reproductor */
+}
+
+.close-button:hover {
+  background-color: rgb(158, 158, 158);
+}
+
+  
