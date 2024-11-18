@@ -73,7 +73,7 @@ function App() {
       <Contenido contenido={mockContenidoSerie} />
       :
       <Contenido contenido={mockContenidoPelicula} />:{/* <Contenido /> */}
-      <Reproductor contenido={mockContenidoSerie} />
+      {/* <Reproductor contenido={mockContenidoSerie} /> */}
     </div>
   );
 }
