@@ -75,9 +75,7 @@
   .contenido-button.temporadas:hover {
     background-color: #b00710;
   }
-
-
-
+  
 /* Estilos de superposición para mostrar el reproductor encima del contenido */
 .overlay {
   position: fixed; /* Fija la superposición en la pantalla */
@@ -92,9 +90,11 @@
   z-index: 9999; /* Asegura que el reproductor esté por encima de todo */
 }
 
-.contenido-image img {
-  max-width: 100%;
+.contenido-detail-image img {
+  width: 100%;
+  height: 300px;
   border-radius: 8px;
+  object-fit: cover;
 }
 
 
