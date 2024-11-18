@@ -1,37 +1,45 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
+import "../styles/ContenidoDetail.css";
 
-function ContenidoDetail({ contenidoId }) {
-  const [contenido, setContenido] = useState(null);
-
-  useEffect(() => {
-    if (contenidoId) {
-      // Cargar los detalles del contenido seleccionado
-      axios.get(`/contenido/${contenidoId}`) // Cambiar a la ruta real del backend
-        .then((response) => setContenido(response.data))
-        .catch((error) => console.error("Error fetching contenido:", error));
-    }
-  }, [contenidoId]);
-
-  if (!contenidoId) {
-    return <p>Selecciona un contenido para ver los detalles.</p>;
-  }
-
-  if (!contenido) {
-    return <p>Cargando detalles del contenido...</p>;
-  }
+function Contenido({ contenido }) {
+  const isSerie = contenido.tipo.toLowerCase() === "serie";
 
   return (
-    <div>
-      <h2>Detalles del Contenido</h2>
-      <p><strong>Título:</strong> {contenido.titulo}</p>
-      <p><strong>Sinopsis:</strong> {contenido.sinopsis}</p>
-      <p><strong>Duración:</strong> {contenido.duracion} minutos</p>
-      <p><strong>Género:</strong> {contenido.genero}</p>
-      <p><strong>Director:</strong> {contenido.director}</p>
-      <p><strong>Elenco:</strong> {contenido.elenco}</p>
+    <div className="contenido">
+      <div className="contenido-image">
+        <img src={`/assets/img/${contenido.imagen}`} alt={contenido.titulo} />
+      </div>
+      <div className="contenido-info">
+      <h1>{contenido.titulo} </h1>
+        <h2>{contenido.tipo}</h2>
+        <p><strong>Sinopsis:</strong> {contenido.sinopsis}</p>
+        <p><strong>Director:</strong> {contenido.director}</p>
+        <p><strong>Elenco:</strong> {contenido.elenco}</p>
+        <p><strong>Duración:</strong> {contenido.duracion} min</p>
+        <p><strong>Género:</strong> {contenido.genero}</p>
+        <p><strong>Tipo:</strong> {contenido.tipo}</p>
+      </div>
+      <div className="contenido-actions">
+        {isSerie ? (
+          <button
+            className="contenido-button temporadas"
+            onClick={() => handleShowTemporadas(contenido.id_contenido)}
+          >
+            Ver Temporadas
+          </button>
+        ) : (
+          <button className="contenido-button play">Reproducir Contenido</button>
+        )}
+      </div>
     </div>
   );
 }
 
-export default ContenidoDetail;
+function handleShowTemporadas(idContenido) {
+  // This function will handle navigation to the temporadas list.
+  console.log(`Navigate to temporadas of contenido ID: ${idContenido}`);
+  // Example: You can use a router to navigate to a new page.
+}
+
+export default Contenido;
+
