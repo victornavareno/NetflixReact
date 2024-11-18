@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ContenidoBox from "./ContenidoBox";
 import "../styles/Vista.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 // // function Vista({ vista }) {
 // //   const [contenidos, setContenidos] = useState([]);
@@ -45,7 +46,6 @@ import "../styles/Vista.css";
 //   }
 // export default Vista;
 
-
 function Vista({ vista }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -57,9 +57,7 @@ function Vista({ vista }) {
   };
 
   const handleNext = () => {
-    setCurrentIndex((prevIndex) =>
-      Math.min(prevIndex + 1, totalVistas - 1)
-    );
+    setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, totalVistas - 1));
   };
 
   return (
@@ -67,7 +65,7 @@ function Vista({ vista }) {
       <h2>{vista.nombre_vista}</h2>
       <div className="carousel-container">
         <button className="carousel-button prev" onClick={handlePrev}>
-          ⬅
+          <i class="bi bi-chevron-left"></i>
         </button>
         <div className="carousel">
           <div
@@ -88,7 +86,7 @@ function Vista({ vista }) {
           </div>
         </div>
         <button className="carousel-button next" onClick={handleNext}>
-          ➡
+          <i class="bi bi-chevron-compact-right"></i>
         </button>
       </div>
     </div>

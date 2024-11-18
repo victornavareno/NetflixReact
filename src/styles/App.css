@@ -1,9 +1,14 @@
+.background{
+  background: linear-gradient(to bottom, rgb(19, 19, 19), rgb(27, 27, 27));
+  height: 1080px;
+}
+
 h1{
   font-size: xxx-large;
   margin: 5%;
   margin-top: 10px;
   margin-bottom: 10px;
-  color: rgb(228, 0, 0);
+  color: rgb(208, 0, 0);
 }
 
 h2{
