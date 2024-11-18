@@ -4,8 +4,6 @@
 
 This project is a Netflix-like web application built using React. It displays various views of content (e.g., movies, series) fetched from a backend API and allows users to interact with content details.
 
----
-
 ## Features
 
 - Display lists of content (movies and series) grouped into views.
@@ -13,8 +11,6 @@ This project is a Netflix-like web application built using React. It displays va
 - Interactive carousel for browsing content.
 - Play content or explore related details (e.g., director, cast, synopsis).
 - Organized project structure with reusable components.
-
----
 
 ## Technologies used
 
