@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Vista from "./components/Vista";
 import ContenidoDetail from "./components/ContenidoDetail";
 import "./styles/App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   document.title = "NETFLIX";
@@ -42,13 +42,16 @@ function App() {
         </div>
         <div>
           <main className="content">
-            {vistas.map((vista) => (
-              <Vista key={vista.id_vista} vista={vista} />
-            ))}
+            <Routes>
+              <Route
+                path="/"
+                element={vistas.map((vista) => (
+                  <Vista key={vista.id_vista} vista={vista} />
+                ))}
+              />
+              <Route path="/contenido/:id" element={<ContenidoDetail />} />
+            </Routes>
           </main>
-          <Routes>
-            <Route path="/contenido/:id" element={<ContenidoDetail />} />
-          </Routes>
         </div>
       </div>
     </Router>

@@ -16,8 +16,8 @@ function ContenidoDetail() {
   const [cargandoEpisodios, setCargandoEpisodios] = useState(false);
 
   const handleShowTemporadas = async (id_contenido) => {
-    if(mostrarTemporadas){
-      setMostrarTemporadas(false)
+    if (mostrarTemporadas) {
+      setMostrarTemporadas(false);
       return;
     } else {
       if (episodios.length > 0) {
@@ -26,7 +26,7 @@ function ContenidoDetail() {
       }
       setCargandoTemporadas(true);
       setError(null);
-  
+
       try {
         const respuesta = await axios.get(
           `http://127.0.0.1:8080/contenido/${id_contenido}/Temporadas`
@@ -39,26 +39,25 @@ function ContenidoDetail() {
         setCargandoTemporadas(false);
       }
     }
-    
   };
 
   const handleShowEpisodios = async (id_contenido, numero) => {
-    if(mostrarEpisodios[numero])
+    if (mostrarEpisodios[numero])
       setMostrarEpisodios((prevState) => ({
         ...prevState,
-        [numero]: false, 
+        [numero]: false,
       }));
     else {
       if (episodios.length > 0) {
         setMostrarEpisodios((prevState) => ({
           ...prevState,
-          [numero]: true, 
+          [numero]: true,
         }));
         return;
       }
       setCargandoEpisodios(true);
       setError(null);
-  
+
       try {
         const respuesta = await axios.get(
           `http://127.0.0.1:8080/contenido/${id_contenido}/${numero}/ListaEpisodios`
@@ -66,7 +65,7 @@ function ContenidoDetail() {
         setEpisodios(respuesta.data);
         setMostrarEpisodios((prevState) => ({
           ...prevState,
-          [numero]: true, 
+          [numero]: true,
         }));
       } catch (err) {
         setError("Error al cargar los episodios");
@@ -74,7 +73,6 @@ function ContenidoDetail() {
         setCargandoEpisodios(false);
       }
     }
-    
   };
 
   // Unconditionally define the state
@@ -104,12 +102,24 @@ function ContenidoDetail() {
         <div className="contenido-info">
           <h1>{contenido.titulo}</h1>
           <h2>{contenido.tipo}</h2>
-          <p><strong>Sinopsis:</strong> {contenido.sinopsis}</p>
-          <p><strong>Director:</strong> {contenido.director}</p>
-          <p><strong>Elenco:</strong> {contenido.elenco}</p>
-          <p><strong>Duración:</strong> {contenido.duracion} min</p>
-          <p><strong>Género:</strong> {contenido.genero}</p>
-          <p><strong>Tipo:</strong> {contenido.tipo}</p>
+          <p>
+            <strong>Sinopsis:</strong> {contenido.sinopsis}
+          </p>
+          <p>
+            <strong>Director:</strong> {contenido.director}
+          </p>
+          <p>
+            <strong>Elenco:</strong> {contenido.elenco}
+          </p>
+          <p>
+            <strong>Duración:</strong> {contenido.duracion} min
+          </p>
+          <p>
+            <strong>Género:</strong> {contenido.genero}
+          </p>
+          <p>
+            <strong>Tipo:</strong> {contenido.tipo}
+          </p>
         </div>
         <div className="contenido-actions">
           {isSerie ? (
@@ -120,7 +130,10 @@ function ContenidoDetail() {
               {mostrarTemporadas ? "Ocultar Temporadas" : "Ver Temporadas"}
             </button>
           ) : (
-            <button className="contenido-button play" onClick={handleReproducir}>
+            <button
+              className="contenido-button play"
+              onClick={handleReproducir}
+            >
               Reproducir Contenido
             </button>
           )}
@@ -138,9 +151,16 @@ function ContenidoDetail() {
                       <h3>Temporada {temporada.numero}</h3>
                       <button
                         className="contenido-button episodios"
-                        onClick={() => handleShowEpisodios(contenido.id_contenido, temporada.numero)}
+                        onClick={() =>
+                          handleShowEpisodios(
+                            contenido.id_contenido,
+                            temporada.numero
+                          )
+                        }
                       >
-                        {mostrarEpisodios[temporada.numero] ? "Ocultar Episodios" : "Ver Episodios"}
+                        {mostrarEpisodios[temporada.numero]
+                          ? "Ocultar Episodios"
+                          : "Ver Episodios"}
                       </button>
                       {mostrarEpisodios[temporada.numero] ? (
                         <div>
@@ -149,11 +169,11 @@ function ContenidoDetail() {
                             <div>
                               <h2>Episodios</h2>
                               <ul>
-                              {episodios.map((episodio) => (
-                                <div key={episodio.id_episodio}>
-                                  <li>Episodio {episodio.numero}</li>
-                                </div>
-                              ))}
+                                {episodios.map((episodio) => (
+                                  <div key={episodio.id_episodio}>
+                                    <li>Episodio {episodio.numero}</li>
+                                  </div>
+                                ))}
                               </ul>
                             </div>
                           )}
@@ -170,7 +190,10 @@ function ContenidoDetail() {
 
       {showReproductor && (
         <div className="overlay">
-          <Reproductor contenido={contenido} onClose={handleCerrarReproductor} />
+          <Reproductor
+            contenido={contenido}
+            onClose={handleCerrarReproductor}
+          />
         </div>
       )}
     </div>

@@ -101,4 +101,11 @@
 .contenido-actions {
   margin-top: 20px;
 }
+
+.error-message{
+  color: rgb(255, 255, 255);
+  font-size: 1.2rem;
+  text-align: center;
+  margin-top: 20px;
+}
   
