@@ -1,11 +1,21 @@
 .vista {
   text-align: left;
+  padding-bottom: 0px;
 }
 
+.vista h2{
+  font-size: 1.3rem;
+  padding-top: 10px;
+  padding-left: 10px;
+  margin: 0;
+  color: white;
+}
 .carousel-container {
   position: relative;
   width: 100%;
+  height: 100%;
   overflow: hidden;
+  padding-bottom: 0px;
 }
 
 .carousel {
@@ -14,6 +24,7 @@
   overflow: hidden;
   padding-left: 5%;
   padding-right: 5%;
+  padding-bottom: 15px;
 }
 
 .carousel-track {
@@ -38,6 +49,10 @@
   cursor: pointer;
   padding: 10px;
   z-index: 1;
+}
+
+.carousel-button:hover {
+  background-color: rgba(25, 25, 25, 0.223);
 }
 
 .carousel-button.prev {

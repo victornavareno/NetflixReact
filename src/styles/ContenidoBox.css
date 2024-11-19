@@ -2,17 +2,18 @@
     height: 160px;
     display: flex;
     flex-direction: column;
-    border: 1px solid #ccc;
+    /* border: 2px solid #6c6c6c; */
     border-radius: 8px;
     overflow: hidden;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
     background-color: #393939;
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 0 10px 10px rgba(0, 0, 1, 0.41);
   }
   
   .contenido-box:hover {
     transform: scale(1.05);
-    box-shadow: 0 10px 10px rgba(0, 0, 1, 0.41);
+    box-shadow: 0 15px 15px rgba(0, 0, 1, 0.519);
   }
   
   .contenido-box-image img {
