@@ -1,4 +1,5 @@
 .contenido-box {
+    cursor: pointer;
     height: 160px;
     display: flex;
     flex-direction: column;
