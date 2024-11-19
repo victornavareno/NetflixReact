@@ -24,21 +24,28 @@ function App() {
       });
   }, []);
 
-  if (loading) return <p>Cargando vistas...</p>;
-  if (error) return <p>Error al cargar vistas: {error}</p>;
+  if (loading) return <p>Loading views...</p>;
+  if (error) return <p>Error loading views: {error}</p>;
 
   return (
     <Router>
       <div className="background">
-        <h1>NETFLIX</h1>
-        <h2>Bienvenido de nuevo, USUARIO</h2>
+        <header className="header">
+          <h1>NETFLIX</h1>
+          <div className="header-buttons">
+            <button className="perfiles-button">Perfiles</button>
+            <button className="login-button">Login</button>
+          </div>
+        </header>
+        <div className="welcome-text">
+          <h2>Explora los mejores contenidos creados para ti!</h2>
+        </div>
+        <main className="content">
+          {vistas.map((vista) => (
+            <Vista key={vista.id_vista} vista={vista} />
+          ))}
+        </main>
         <Routes>
-          <Route
-            path="/"
-            element={vistas.map((vista) => (
-              <Vista key={vista.id_vista} vista={vista} />
-            ))}
-          />
           <Route path="/contenido/:id" element={<ContenidoDetail />} />
         </Routes>
       </div>
