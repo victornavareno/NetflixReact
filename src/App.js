@@ -40,14 +40,16 @@ function App() {
         <div className="welcome-text">
           <h2>Explora los mejores contenidos creados para ti!</h2>
         </div>
-        <main className="content">
-          {vistas.map((vista) => (
-            <Vista key={vista.id_vista} vista={vista} />
-          ))}
-        </main>
-        <Routes>
-          <Route path="/contenido/:id" element={<ContenidoDetail />} />
-        </Routes>
+        <div>
+          <main className="content">
+            {vistas.map((vista) => (
+              <Vista key={vista.id_vista} vista={vista} />
+            ))}
+          </main>
+          <Routes>
+            <Route path="/contenido/:id" element={<ContenidoDetail />} />
+          </Routes>
+        </div>
       </div>
     </Router>
   );
