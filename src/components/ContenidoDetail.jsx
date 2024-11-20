@@ -145,7 +145,9 @@ function ContenidoDetail() {
               {cargandoTemporadas && <p>Cargando temporadas...</p>}
               {mostrarTemporadas && (
                 <div>
-                  {temporadas.map((temporada) => (
+                  {temporadas && 
+                    temporadas.length > 0 ? 
+                    (temporadas.map((temporada) => (
                     <div key={temporada.idtemporada}>
                       <div className="contenido-temporadas">
                         <h3>Temporada {temporada.numero}</h3>
@@ -168,8 +170,10 @@ function ContenidoDetail() {
                           {cargandoEpisodios && <p>Cargando episodios...</p>}
                           {mostrarEpisodios[temporada.numero] && (
                             <div className="contenido-episodios">
-                                {episodios[temporada.numero].map((episodio) => (
-                                  <div key={episodio.id_episodio} className="contenido-episodios-box">
+                                {episodios[temporada.numero] && 
+                                  episodios[temporada.numero].length > 0 ? 
+                                  (episodios[temporada.numero].map((episodio) => (
+                                  <div key={episodio.id_episodio} className="contenido-episodios-box" onClick={handleReproducir}>
                                     <div className="contenido-box-image">
                                       {/* <img src={contenido.imagen || "placeholder.jpg"} alt={contenido.titulo} /> */}
                                       {/* <img src="/assets/img/FRIENDS.jpg" alt="Breaking Bad" /> */}
@@ -189,13 +193,13 @@ function ContenidoDetail() {
                                       </div>
                                     </div>
                                   </div>
-                                ))}
+                                ))) : <span className="contenido-vacio">Aún no hay episodios</span> }
                             </div>
                           )}
                         </div>
                       ) : null}
                     </div>
-                  ))}
+                  ))) : <span className="contenido-vacio">Aún no hay temporadas</span> }
                 </div>
               )}
             </div>

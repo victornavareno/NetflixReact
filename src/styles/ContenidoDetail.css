@@ -133,6 +133,11 @@
   color: #aaa; /* Texto más tenue */
 }
 
+.contenido-vacio{
+  padding-left: 1em;
+  color: #aaa;
+}
+
 /* Estilos de superposición para mostrar el reproductor encima del contenido */
 .overlay {
   position: fixed; /* Fija la superposición en la pantalla */
