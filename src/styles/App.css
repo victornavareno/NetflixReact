@@ -1,7 +1,7 @@
 /* General styling */
 .background {
   background: linear-gradient(to bottom, rgb(19, 19, 19), rgb(27, 27, 27));
-  height: 1080;
+  height: 1080px;
   display: grid;
   grid-template-rows: auto auto 1fr;
   color: white;
@@ -42,7 +42,7 @@
   background-color: rgb(255, 50, 50);
 }
 
-.perfiles-button {
+.contenidos-button {
   background-color: rgb(237, 237, 237);
   color: rgb(27, 27, 27);
   padding: 10px 20px;
@@ -52,7 +52,7 @@
   font-size: 1rem;
 }
 
-.perfiles-button:hover {
+.contenidos-button:hover {
   background-color: rgb(255, 255, 255);
 }
 

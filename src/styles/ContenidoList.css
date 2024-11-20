@@ -1,0 +1,18 @@
+.contenido-list {
+    padding-top: 0;
+    padding-left: 60px;
+    padding-right: 60px;
+    padding-bottom: 60px;
+  }
+  
+  .contenido-list h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .contenido-list-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); /* 5 columnas fijas */
+    gap: 20px; /* Espaciado entre elementos */
+  }
+  

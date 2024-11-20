@@ -117,9 +117,6 @@ function ContenidoDetail() {
           <p>
             <strong>Género:</strong> {contenido.genero}
           </p>
-          <p>
-            <strong>Tipo:</strong> {contenido.tipo}
-          </p>
         </div>
         <div className="contenido-actions">
           {isSerie ? (
