@@ -20,11 +20,13 @@
     align-items: center; /* Center align vertically */
     margin-bottom: 20px; /* Optional: adds some space between the header and the filter bar */
   }
+
+
   
   .search-filters {
     margin-top: 0;
     margin-bottom: 20px;
-    width: 33%; /* Adjust width as needed */
+    width: 98.5%; /*  no se por que si pongo una cifra random se ajusta perfecto */
     display: flex;
     gap: 20px;
     justify-content: left;
@@ -55,6 +57,29 @@
     outline: none;
     transition: all 0.3s ease;
   }
+
+  .search-filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Align items vertically center */
+}
+.go-back-button {
+  background-color: rgb(228, 0, 0);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-bottom: 0px;
+  margin-left: auto; /* Pushes the button to the far right */
+  align-self: center; /* Centers the button vertically */
+}
+
+.go-back-button:hover {
+  background-color: rgb(255, 50, 50);
+}
+
   
   .search-filters select:hover {
     background-color: #272727; /* Dark background for the select box */

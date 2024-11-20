@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import ContenidoBox from "./ContenidoBox"; // Importar el componente ContenidoBox
+import { useNavigate } from "react-router-dom"; // Importar useNavigate
 import "../styles/ContenidoList.css"; // Opcional: añadir estilos
 
 function ContenidoList() {
@@ -13,6 +14,8 @@ function ContenidoList() {
     tipo: "",
     genero: "",
   });
+
+  const navigate = useNavigate(); // Initialize navigate
 
   // Función para manejar cambios en los filtros
   const handleFilterChange = (e) => {
@@ -92,6 +95,10 @@ function ContenidoList() {
             <option value="ciencia ficcion">Ciencia Ficción</option>
           </select>
         </label>
+        {/* Botón de "Go Back" */}
+        <button className="go-back-button" onClick={() => navigate("/")}>
+          Volver a la Página Principal
+        </button>
       </div>
 
       {/* Mostrar los contenidos filtrados */}
