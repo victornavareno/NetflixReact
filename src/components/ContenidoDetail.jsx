@@ -142,36 +142,51 @@ function ContenidoDetail() {
               {cargandoTemporadas && <p>Cargando temporadas...</p>}
               {mostrarTemporadas && (
                 <div>
-                  <h2>Temporadas</h2>
                   {temporadas.map((temporada) => (
                     <div key={temporada.idtemporada}>
-                      <h3>Temporada {temporada.numero}</h3>
-                      <button
-                        className="contenido-button episodios"
-                        onClick={() =>
-                          handleShowEpisodios(
-                            contenido.id_contenido,
-                            temporada.numero
-                          )
-                        }
-                      >
-                        {mostrarEpisodios[temporada.numero]
-                          ? "Ocultar Episodios"
-                          : "Ver Episodios"}
-                      </button>
+                      <div className="contenido-temporadas">
+                        <h3>Temporada {temporada.numero}</h3>
+                        <button
+                          className="contenido-button episodios"
+                          onClick={() =>
+                            handleShowEpisodios(
+                              contenido.id_contenido,
+                              temporada.numero
+                            )
+                          }
+                        >
+                          {mostrarEpisodios[temporada.numero]
+                            ? "Ocultar Episodios"
+                            : "Ver Episodios"}
+                        </button>
+                      </div>
                       {mostrarEpisodios[temporada.numero] ? (
                         <div>
                           {cargandoEpisodios && <p>Cargando episodios...</p>}
                           {mostrarEpisodios[temporada.numero] && (
-                            <div>
-                              <h2>Episodios</h2>
-                              <ul>
+                            <div className="contenido-episodios">
                                 {episodios.map((episodio) => (
-                                  <div key={episodio.id_episodio}>
-                                    <li>Episodio {episodio.numero}</li>
+                                  <div key={episodio.id_episodio} className="contenido-episodios-box">
+                                    <div className="contenido-box-image">
+                                      {/* <img src={contenido.imagen || "placeholder.jpg"} alt={contenido.titulo} /> */}
+                                      {/* <img src="/assets/img/FRIENDS.jpg" alt="Breaking Bad" /> */}
+                                      {/* IMPORTANTE: HAY QUE ESTANDARIZAR EL NOMBRE DE 'IMAGEN' EN LA BASE DE DATOS */}
+                                      <img
+                                        src={`/assets/img/${contenido.imagen}`}
+                                        alt={`${contenido.imagen}`}
+                                      />
+                                    </div>
+                                    <div className="contenido-episodios-box-info">
+                                      <div className="info-ep">
+                                        <p>{episodio.numero}</p>
+                                        <p>{episodio.duracion} m.</p>
+                                      </div>
+                                      <div className="info-ep-titulo">
+                                        <p>{episodio.titulo}</p>
+                                      </div>
+                                    </div>
                                   </div>
                                 ))}
-                              </ul>
                             </div>
                           )}
                         </div>
