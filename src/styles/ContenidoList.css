@@ -1,4 +1,5 @@
 .contenido-list {
+    margin-top: 0;
     padding-top: 0;
     padding-left: 60px;
     padding-right: 60px;
@@ -6,10 +7,86 @@
   }
   
   .contenido-list h2 {
-    text-align: center;
-    margin-bottom: 20px;
+    font-size: 40px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+    padding-left: 5px;
   }
   
+  /* Container for h2 and search filters, use flexbox to align them horizontally */
+  .header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Center align vertically */
+    margin-bottom: 20px; /* Optional: adds some space between the header and the filter bar */
+  }
+  
+  .search-filters {
+    margin-top: 0;
+    margin-bottom: 20px;
+    width: 33%; /* Adjust width as needed */
+    display: flex;
+    gap: 20px;
+    justify-content: left;
+    align-items: left;
+    background-color: rgba(54, 54, 54, 0.5);  /* Dark background with some transparency */
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  }
+  
+  .search-filters label {
+    font-weight: bold;
+    font-size: 16px;
+    color: white;
+    margin-right: 10px;
+  }
+  
+  .search-filters select {
+    margin-left: 6px;
+    cursor: pointer;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: 2px solid #333; /* Dark border */
+    border-radius: 6px;
+    background-color: #111; /* Dark background for the select box */
+    color: white; /* White text */
+    appearance: none; /* Remove default dropdown arrow */
+    outline: none;
+    transition: all 0.3s ease;
+  }
+  
+  .search-filters select:hover {
+    background-color: #272727; /* Dark background for the select box */
+  }
+  
+  .search-filters select:focus {
+    border-color: #494949; /* Lighter border when focused */
+    background-color: #333;
+  }
+  
+  .search-filters select option {
+    background-color: #111;
+    color: white;
+  }
+  
+  .search-filters select option:hover {
+    background-color: #333 !important; /* Slight highlight on hover */
+  }
+  
+  .search-filters select::-webkit-appearance {
+    appearance: none; /* Custom styling for dropdown */
+  }
+  
+  .search-filters select::-moz-appearance {
+    appearance: none; /* Custom styling for Firefox */
+  }
+  
+  .search-filters select::-ms-expand {
+    display: none; /* Remove dropdown arrow in IE */
+  }
+  
+  /* Grid layout for content */
   .contenido-list-grid {
     display: grid;
     grid-template-columns: repeat(5, 1fr); /* 5 columnas fijas */
