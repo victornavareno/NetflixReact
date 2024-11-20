@@ -9,7 +9,7 @@ import {
 import Vista from "./components/Vista";
 import ContenidoDetail from "./components/ContenidoDetail";
 import ContenidoList from "./components/ContenidoList"; // muestra la lista de todos los contenidos en la base de datos
-import Login from "./components/Login"; // pagina de login pa usuario
+import Usuarios from "./components/Usuarios"; // pagina de login pa usuario
 import "./styles/App.css";
 
 function App() {
@@ -59,7 +59,7 @@ function App() {
               {/* PAGINA DE DETALLE DE CONTENIDO */}
               <Route path="/contenido" element={<ContenidoList />} />{" "}
               {/* PAGINA DE LISTA DE CONTENIDOS */}
-              <Route path="/login" element={<Login />} />{" "}
+              <Route path="/login" element={<Usuarios />} />{" "}
               {/* PAGINA DE LOGIN */}
             </Routes>
           </main>
