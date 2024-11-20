@@ -9,6 +9,7 @@ import {
 import Vista from "./components/Vista";
 import ContenidoDetail from "./components/ContenidoDetail";
 import ContenidoList from "./components/ContenidoList"; // muestra la lista de todos los contenidos en la base de datos
+import Login from "./components/Login"; // pagina de login pa usuario
 import "./styles/App.css";
 
 function App() {
@@ -54,8 +55,12 @@ function App() {
                   <Vista key={vista.id_vista} vista={vista} />
                 ))}
               />
-              <Route path="/contenido/:id" element={<ContenidoDetail />} />
-              <Route path="/contenido" element={<ContenidoList />} />
+              <Route path="/contenido/:id" element={<ContenidoDetail />} />{" "}
+              {/* PAGINA DE DETALLE DE CONTENIDO */}
+              <Route path="/contenido" element={<ContenidoList />} />{" "}
+              {/* PAGINA DE LISTA DE CONTENIDOS */}
+              <Route path="/login" element={<Login />} />{" "}
+              {/* PAGINA DE LOGIN */}
             </Routes>
           </main>
         </div>
@@ -76,7 +81,12 @@ function NavigationButtons() {
       >
         Contenidos
       </button>
-      <button className="login-button">Login</button>
+      <button
+        className="login-button"
+        onClick={() => navigate("/login")} // Navigate to login page
+      >
+        Login
+      </button>
     </>
   );
 }
