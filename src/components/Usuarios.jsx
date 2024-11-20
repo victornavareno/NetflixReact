@@ -1,59 +1,58 @@
-// Usuarios.js
 import React from "react";
 import UsuarioBox from "./UsuarioBox";
+import styles from "../styles/Usuarios.css";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 function Usuarios() {
   const usuarios = [
-    { nombre: "Pedro", imagen: "url_de_imagen_de_pedro.png" },
-    { nombre: "Usuario 1", imagen: "url_de_imagen_usuario1.png" },
-    { nombre: "Usuario 2", imagen: "url_de_imagen_usuario2.png" },
-    { nombre: "Añadir perfil", imagen: "url_de_icono_de_añadir_perfil.png" },
+    {
+      idUsuario: 1,
+      nombre: "Maria",
+      imagen: "user1.jpg",
+      contenidosFavoritos: [1, 2, 3],
+      rol: "administrador",
+    },
+    {
+      idUsuario: 2,
+      nombre: "Juan",
+      imagen: "user2.jpg",
+      contenidosFavoritos: [4, 5, 6],
+      rol: "cliente",
+    },
+    {
+      idUsuario: 3,
+      nombre: "Ana",
+      imagen: "user3.jpg",
+      contenidosFavoritos: [7, 8, 9],
+      rol: "cliente",
+    },
+    {
+      idUsuario: 4,
+      nombre: "Luis",
+      imagen: "user4.jpg",
+      contenidosFavoritos: [7, 10],
+      rol: "cliente",
+    },
   ];
 
   return (
-    <div style={styles.contenedor}>
-      <h2 style={styles.titulo}>¿Quién eres? Elige tu perfil</h2>
-      <div style={styles.perfiles}>
-        {usuarios.map((usuario, index) => (
-          <UsuarioBox
-            key={index}
-            nombre={usuario.nombre}
-            imagen={usuario.imagen}
-          />
-        ))}
+    <div className="contenedor">
+      <div className="usuarios">
+        <h2 className="titulo">¿Quién eres? Elige tu usuario</h2>
+        <div className="perfiles">
+          {usuarios.map((usuario) => (
+            <UsuarioBox key={usuario.idUsuario} usuario={usuario} />
+          ))}
+          {/* Agregar Usuario Button */}
+          <div className="botonAgregar">
+            <i className="bi bi-plus-square-fill"></i>
+            <p>Agregar Usuario</p>
+          </div>
+        </div>
+        <button className="botonAdministrar">Administrar Usuarios</button>
       </div>
-      <button style={styles.botonAdministrar}>Administrar Perfiles</button>
     </div>
   );
 }
-
-const styles = {
-  contenedor: {
-    textAlign: "center",
-    color: "#fff",
-    backgroundColor: "#000",
-    padding: "20px",
-  },
-  titulo: {
-    fontSize: "24px",
-    marginBottom: "20px",
-  },
-  perfiles: {
-    display: "flex",
-    justifyContent: "center",
-    gap: "20px",
-    flexWrap: "wrap",
-  },
-  botonAdministrar: {
-    marginTop: "20px",
-    padding: "10px 20px",
-    fontSize: "16px",
-    color: "#fff",
-    backgroundColor: "#333",
-    border: "none",
-    borderRadius: "5px",
-    cursor: "pointer",
-  },
-};
 
 export default Usuarios;

@@ -1,42 +1,17 @@
-// UsuarioBox.js
 import React from "react";
+import styles from "../styles/UsuarioBox.css"; // Importando como módulo de CSS
 
-function UsuarioBox({ nombre, imagen }) {
+function UsuarioBox({ usuario }) {
   return (
-    <div style={styles.box}>
+    <div className="box">
       <img
-        src={"assets/img/users/user1.jpg"}
-        alt={`${nombre}'s profile picture`}
-        style={styles.imagen}
+        src={`/assets/img/users/${usuario.imagen}`}
+        alt={`${usuario.nombre}`}
+        className={styles.imagen} // Clase para la imagen
       />
-      <p style={styles.nombre}>{nombre}</p>
+      <h3 className="nombre">{usuario.nombre}</h3> {/* Clase para el nombre */}
     </div>
   );
 }
-
-const styles = {
-  box: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    width: "100px",
-    padding: "10px",
-    margin: "10px",
-    cursor: "pointer",
-    borderRadius: "10px",
-    backgroundColor: "#f2f2f2",
-  },
-  imagen: {
-    width: "60px",
-    height: "60px",
-    borderRadius: "50%",
-  },
-  nombre: {
-    marginTop: "10px",
-    fontSize: "14px",
-    fontWeight: "bold",
-    color: "#333",
-  },
-};
 
 export default UsuarioBox;
