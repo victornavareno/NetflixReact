@@ -17,11 +17,13 @@
   padding: 20px;
 }
 
-.header h1 {
-  padding-left: 30px;
-  font-size: 3rem;
-  color: rgb(228, 0, 0);
+.header img {
+  padding-left: 10px;
   margin: 0;
+  cursor: pointer;
+  width: 100px;
+  margin: auto;
+  display: block;
 }
 
 .header-buttons {

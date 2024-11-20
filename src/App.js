@@ -38,7 +38,9 @@ function App() {
     <Router>
       <div className="background">
         <header className="header">
-          <h1>NETFLIX</h1>
+          <div >
+            <NavigationHome />
+          </div>
           <div className="header-buttons">
             <NavigationButtons />
           </div>
@@ -87,6 +89,16 @@ function NavigationButtons() {
       >
         Login
       </button>
+    </>
+  );
+}
+
+function NavigationHome() {
+  const navigate = useNavigate();
+
+  return (
+    <>
+      <img src={`/assets/img/Netflix.png`} alt="Netflix logo" onClick={() => navigate("/")} ></img>
     </>
   );
 }
