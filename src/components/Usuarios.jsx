@@ -7,28 +7,28 @@ function Usuarios() {
   const usuarios = [
     {
       idUsuario: 1,
-      nombre: "Maria",
+      nombre: "Victor",
       imagen: "user1.jpg",
       contenidosFavoritos: [1, 2, 3],
       rol: "administrador",
     },
     {
       idUsuario: 2,
-      nombre: "Juan",
+      nombre: "Jesus",
       imagen: "user2.jpg",
       contenidosFavoritos: [4, 5, 6],
       rol: "cliente",
     },
     {
       idUsuario: 3,
-      nombre: "Ana",
+      nombre: "María",
       imagen: "user3.jpg",
       contenidosFavoritos: [7, 8, 9],
       rol: "cliente",
     },
     {
       idUsuario: 4,
-      nombre: "Luis",
+      nombre: "Jesus",
       imagen: "user4.jpg",
       contenidosFavoritos: [7, 10],
       rol: "cliente",
