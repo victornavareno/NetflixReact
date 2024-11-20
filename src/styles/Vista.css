@@ -43,7 +43,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.223);
+  background-color: rgba(0, 0, 0, 0.536);
   color: white;
   border: none;
   cursor: pointer;
@@ -52,7 +52,7 @@
 }
 
 .carousel-button:hover {
-  background-color: rgba(25, 25, 25, 0.223);
+  background-color: rgba(7, 7, 7, 0.423);
 }
 
 .carousel-button.prev {
