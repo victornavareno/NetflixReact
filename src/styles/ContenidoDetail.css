@@ -75,7 +75,64 @@
   .contenido-button.temporadas:hover {
     background-color: #b00710;
   }
-  
+
+.contenido-temporadas {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 1em;
+}  
+
+.contenido-temporadas button{
+  margin-left: 2em;
+}
+
+.contenido-episodios {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: 0.5em 0 1.5em 0;
+}
+
+.contenido-episodios-box{
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid #6c6c6c;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #393939;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  box-shadow: 0 10px 10px rgba(0, 0, 1, 0.41);
+  margin-right: 2em;
+}
+
+.contenido-episodios-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 15px 15px rgba(0, 0, 1, 0.519);
+}
+
+.contenido-episodios-box-info{
+  padding: 0.5em;
+}
+
+.contenido-episodios-box-info p{
+  margin: 0 !important;
+}
+
+.info-ep{
+  display: flex;
+  justify-content: space-between;
+}
+
+.info-ep-titulo{
+  padding-top: 1em;
+  color: #aaa; /* Texto más tenue */
+}
+
 /* Estilos de superposición para mostrar el reproductor encima del contenido */
 .overlay {
   position: fixed; /* Fija la superposición en la pantalla */
