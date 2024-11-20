@@ -1,11 +1,12 @@
 /* General styling */
 .background {
   background: linear-gradient(to bottom, rgb(19, 19, 19), rgb(27, 27, 27));
-  height: 1080px;
+  min-height: 1080px;
   display: grid;
   grid-template-rows: auto auto 1fr;
   color: white;
   font-family: Arial, sans-serif;
+  padding-bottom: 5em;
 }
 
 /* Row 1: Header */

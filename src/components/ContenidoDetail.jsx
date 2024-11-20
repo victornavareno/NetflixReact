@@ -20,7 +20,7 @@ function ContenidoDetail() {
       setMostrarTemporadas(false);
       return;
     } else {
-      if (episodios.length > 0) {
+      if (temporadas.length > 0) {
         setMostrarTemporadas(true);
         return;
       }
@@ -48,7 +48,7 @@ function ContenidoDetail() {
         [numero]: false,
       }));
     else {
-      if (episodios.length > 0) {
+      if (episodios[numero]?.length > 0) {
         setMostrarEpisodios((prevState) => ({
           ...prevState,
           [numero]: true,
@@ -62,7 +62,10 @@ function ContenidoDetail() {
         const respuesta = await axios.get(
           `http://127.0.0.1:8080/contenido/${id_contenido}/${numero}/ListaEpisodios`
         );
-        setEpisodios(respuesta.data);
+        setEpisodios((prevState) => ({
+          ...prevState,
+          [numero]: respuesta.data, // Agregar episodios solo para esta temporada
+        }));
         setMostrarEpisodios((prevState) => ({
           ...prevState,
           [numero]: true,
@@ -165,7 +168,7 @@ function ContenidoDetail() {
                           {cargandoEpisodios && <p>Cargando episodios...</p>}
                           {mostrarEpisodios[temporada.numero] && (
                             <div className="contenido-episodios">
-                                {episodios.map((episodio) => (
+                                {episodios[temporada.numero].map((episodio) => (
                                   <div key={episodio.id_episodio} className="contenido-episodios-box">
                                     <div className="contenido-box-image">
                                       {/* <img src={contenido.imagen || "placeholder.jpg"} alt={contenido.titulo} /> */}
