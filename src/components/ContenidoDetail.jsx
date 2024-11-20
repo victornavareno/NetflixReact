@@ -139,7 +139,7 @@ function ContenidoDetail() {
           )}
         </div>
 
-        <div className="contenido-temporadas">
+        <div>
           {mostrarTemporadas ? (
             <div>
               {cargandoTemporadas && <p>Cargando temporadas...</p>}
@@ -174,7 +174,7 @@ function ContenidoDetail() {
                                   episodios[temporada.numero].length > 0 ? 
                                   (episodios[temporada.numero].map((episodio) => (
                                   <div key={episodio.id_episodio} className="contenido-episodios-box" onClick={handleReproducir}>
-                                    <div className="contenido-box-image">
+                                    <div className="contenido-episodio-image">
                                       {/* <img src={contenido.imagen || "placeholder.jpg"} alt={contenido.titulo} /> */}
                                       {/* <img src="/assets/img/FRIENDS.jpg" alt="Breaking Bad" /> */}
                                       {/* IMPORTANTE: HAY QUE ESTANDARIZAR EL NOMBRE DE 'IMAGEN' EN LA BASE DE DATOS */}
@@ -186,7 +186,7 @@ function ContenidoDetail() {
                                     <div className="contenido-episodios-box-info">
                                       <div className="info-ep">
                                         <p>{episodio.numero}</p>
-                                        <p>{episodio.duracion} m.</p>
+                                        <p>{episodio.duracion} min</p>
                                       </div>
                                       <div className="info-ep-titulo">
                                         <p>{episodio.titulo}</p>
