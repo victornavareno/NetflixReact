@@ -94,7 +94,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin: 0.5em 0 1.5em 0;
+  margin: 0.5em 0 1em 0;
 }
 
 .contenido-episodios-box{
@@ -108,6 +108,7 @@
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   box-shadow: 0 10px 10px rgba(0, 0, 1, 0.41);
   margin-right: 2em;
+  margin-bottom: 2em;
 }
 
 .contenido-episodios-box:hover {
