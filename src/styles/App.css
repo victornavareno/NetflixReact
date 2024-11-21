@@ -1,11 +1,23 @@
 /* General styling */
+@font-face {
+  font-family: 'NetflixSans';
+  src: url('../assets/fonts/NetflixSans-Regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* he cambiado la fuente, si no os mola comentad esto y se pone arial automaticamente */
+body {
+  font-family: 'NetflixSans', sans-serif !important;
+}
+
 .background {
   background: linear-gradient(to bottom, #141414, rgb(24, 24, 24));
   min-height: 1080px;
   display: grid;
   grid-template-rows: auto auto 1fr;
   color: white;
-  font-family: Arial, sans-serif;
+  /* font-family: Arial, sans-serif; */
   padding-bottom: 5em;
 }
 
@@ -42,7 +54,7 @@
 }
 
 .header-buttons {
-  padding-top: 15px;
+  padding-top: 5px;
   margin-right: 20px;
   display: flex;
   gap: 15px;
