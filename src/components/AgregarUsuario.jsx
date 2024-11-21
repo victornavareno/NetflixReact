@@ -7,9 +7,8 @@ function AgregarUsuario({ setMostrarFormulario }) {
   const [imagen, setImagen] = useState("");
   const [rol] = useState("cliente");
   const [favoritos] = useState([]);
-  const [currentIndex, setCurrentIndex] = useState(0); // Índice de las imágenes mostradas
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Lista de imágenes disponibles (todas las imágenes dentro de la carpeta public/assets/img/pfp/)
   const imagenesDisponibles = [
     "user1.jpg",
     "user2.jpg",
@@ -19,37 +18,57 @@ function AgregarUsuario({ setMostrarFormulario }) {
     "user6.jpg",
   ];
 
-  // Función para manejar el clic en la imagen
   const manejarSeleccionImagen = (imagenSeleccionada) => {
     setImagen(imagenSeleccionada);
   };
 
-  // Función para manejar el envío del formulario
-  const manejarSubmit = (e) => {
+  const manejarSubmit = async (e) => {
     e.preventDefault();
+
+    if (!nombre.trim() || !imagen) {
+      console.error("Nombre e imagen son obligatorios.");
+      return;
+    }
+
     const nuevoUsuario = {
       nombre,
       rol,
       imagen,
-      favoritos,
+      contenidosfavoritos: favoritos,
     };
-    console.log("Nuevo usuario agregado:", nuevoUsuario);
 
-    // Aquí puedes agregar el nuevo usuario a un estado global o enviarlo al backend
+    console.log("Datos enviados al servidor:", nuevoUsuario);
 
-    // Cerrar el formulario al agregar el usuario
+    try {
+      const respuesta = await fetch("http://localhost:8081/usuario", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(nuevoUsuario),
+      });
+
+      if (respuesta.ok) {
+        const data = await respuesta.json();
+        console.log("Usuario agregado con éxito:", data);
+      } else {
+        const error = await respuesta.json();
+        console.error("Error al agregar el usuario:", error);
+      }
+    } catch (error) {
+      console.error("Error en la solicitud:", error);
+    }
+
     setMostrarFormulario(false);
   };
 
-  // Función para mover las imágenes hacia la izquierda
   const moverIzquierda = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0)); // No permitir mover fuera de los límites
+    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
   };
 
-  // Función para mover las imágenes hacia la derecha
   const moverDerecha = () => {
-    setCurrentIndex(
-      (prevIndex) => Math.min(prevIndex + 1, imagenesDisponibles.length - 4) // No permitir mover fuera de los límites
+    setCurrentIndex((prevIndex) =>
+      Math.min(prevIndex + 1, imagenesDisponibles.length - 4)
     );
   };
 
@@ -68,7 +87,7 @@ function AgregarUsuario({ setMostrarFormulario }) {
         </div>
 
         <div className="selectorImagen">
-          <label className="textoSlectorImagen">
+          <label className="textoSelectorImagen">
             Selecciona una Imagen de Perfil:
           </label>
           <div className="carouselContainer">
@@ -76,14 +95,14 @@ function AgregarUsuario({ setMostrarFormulario }) {
               type="button"
               className="flecha izquierda"
               onClick={moverIzquierda}
-              disabled={currentIndex === 0} // Desactivar si está en el primer índice
+              disabled={currentIndex === 0}
             >
-              <i class="bi bi-chevron-left"></i>
+              <i className="bi bi-chevron-left"></i>
             </button>
 
             <div className="carouselImagenes">
               {imagenesDisponibles
-                .slice(currentIndex, currentIndex + 4) // Mostrar solo 4 imágenes a la vez
+                .slice(currentIndex, currentIndex + 4)
                 .map((img, index) => (
                   <div
                     key={index}
@@ -105,9 +124,9 @@ function AgregarUsuario({ setMostrarFormulario }) {
               type="button"
               className="flecha derecha"
               onClick={moverDerecha}
-              disabled={currentIndex >= imagenesDisponibles.length - 4} // Desactivar si está en el último índice
+              disabled={currentIndex >= imagenesDisponibles.length - 4}
             >
-              <i class="bi bi-chevron-compact-right"></i>
+              <i className="bi bi-chevron-compact-right"></i>
             </button>
           </div>
         </div>

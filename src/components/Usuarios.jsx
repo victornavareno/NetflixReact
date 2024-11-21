@@ -5,41 +5,19 @@ import "../styles/Usuarios.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 function Usuarios() {
+  const [usuarios, setUsuarios] = useState([]);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(""); // Estado para mostrar el nombre del usuario seleccionado
   const [mostrarMensaje, setMostrarMensaje] = useState(false); // Estado para controlar la visibilidad del mensaje
   const [fadeOut, setFadeOut] = useState(false); // Estado para aplicar el fade-out
 
-  const usuarios = [
-    {
-      idUsuario: 1,
-      nombre: "Victor",
-      rol: "administrador",
-      imagen: "user1.jpg",
-      favoritos: [1, 2, 3],
-    },
-    {
-      idUsuario: 2,
-      nombre: "Jesus",
-      rol: "cliente",
-      imagen: "user2.jpg",
-      favoritos: [1, 3, 2],
-    },
-    {
-      idUsuario: 3,
-      nombre: "Maria",
-      rol: "cliente",
-      imagen: "user3.jpg",
-      favoritos: [1, 3, 5],
-    },
-    {
-      idUsuario: 4,
-      nombre: "Laura",
-      rol: "cliente",
-      imagen: "user4.jpg",
-      favoritos: [4, 7, 8],
-    },
-  ];
+  useEffect(() => {
+    // Fetch usuarios from API
+    fetch("http://localhost:8081/usuario")
+      .then((response) => response.json())
+      .then((data) => setUsuarios(data))
+      .catch((error) => console.error("Error fetching usuarios:", error));
+  }, []);
 
   // Función para manejar el clic en un usuario
   const manejarSeleccionUsuario = (nombre) => {
