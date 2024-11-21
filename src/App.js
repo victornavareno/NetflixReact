@@ -46,7 +46,7 @@ function App() {
           </div>
         </header>
         <div className="welcome-text">
-          <h2>Explora los mejores contenidos creados para ti!</h2>
+          <h2>Explora los mejores contenidos creados para ti</h2>
         </div>
         <div>
           <main className="content">

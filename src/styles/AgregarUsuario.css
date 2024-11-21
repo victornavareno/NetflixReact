@@ -1,0 +1,184 @@
+
+/* Estilos para el formulario de agregar usuario (Estilo similar a Netflix) */
+.formularioAgregarUsuario {
+    background-color: #141414; /* Fondo oscuro similar al de Netflix */
+    padding: 30px;
+    border-radius: 10px; /* Bordes más suaves */
+    width: 700px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7); /* Sombra sutil */
+    animation: fadeIn 0.3s ease-in-out; /* Animación para aparecer */
+    color: #fff; /* Texto blanco */
+  }
+  
+  .formularioAgregarUsuario h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff; /* Color blanco para el título */
+    font-size: 30px;
+  }
+  
+  .formularioAgregarUsuario form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .formularioAgregarUsuario label {
+    margin: 10px;
+    font-weight: bold;
+    color: #ccc; /* Gris claro para las etiquetas */
+  }
+  
+  .formularioAgregarUsuario input,
+  .formularioAgregarUsuario select {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #333; /* Borde oscuro */
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: #333; /* Fondo oscuro en los inputs */
+    color: #fff; /* Texto blanco en los inputs */
+  }
+  
+  .formularioAgregarUsuario input:focus,
+  .formularioAgregarUsuario select:focus {
+    border-color: #ffffff; /* Resaltar el borde con el color rojo de Netflix */
+    outline: none;
+  }
+  
+  .formularioAgregarUsuario button {
+    margin: 5px;
+    background-color: #3db700; /* Color de fondo rojo similar a Netflix */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .formularioAgregarUsuario button:hover {
+    background-color: #4de600; /* Rojo más brillante al pasar el mouse */
+  }
+  
+  .formularioAgregarUsuario button[type="button"] {
+    background-color: #333; /* Fondo gris oscuro para el botón de cancelar */
+  }
+  
+  .formularioAgregarUsuario button[type="button"]:hover {
+    background-color: #555; /* Color más claro al pasar el mouse */
+  }
+  
+
+  .selectorImagen{
+    margin-top: 20px;
+    padding-bottom: 5px;
+  }
+
+  /* Estilos del carousel de imágenes */
+  .carouselImagenes {
+    margin-left: 40px;
+    padding: 30px !important;
+    margin-right: 40px;
+    display: flex;
+    justify-content: space-between;
+    overflow-x: auto;
+    padding: 10px 0;
+    margin-bottom: 15px;
+  }
+  
+  .imagenItem {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .imagenItem:hover {
+    transform: scale(1.1);
+  }
+  
+  .imagenItem.seleccionada {
+    border: 2px solid #e50914; /* Borde rojo como Netflix cuando está seleccionado */
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.6); /* Sombra roja al seleccionar */
+  }
+  
+  .imagenCarousel {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  /* Animación para el fade-in */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .carouselContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .carouselImagenes {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    overflow: hidden;
+  }
+  
+  .imagenItem {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .imagenItem:hover {
+    transform: scale(1.1);
+  }
+  
+  .imagenItem.seleccionada {
+    border-radius: 100%;
+    border: 2px solid #ebebeb;
+    box-shadow: 0 0 10px rgba(190, 190, 190, 0.59);
+  }
+  
+  .imagenCarousel {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+  
+  .flecha {
+    background: none;
+    border: none;
+    font-size: 30px;
+    color: #333;
+    cursor: pointer;
+    padding: 10px;
+    transition: color 0.3s ease;
+  }
+  
+  .flecha:hover {
+    color: #e9e9e9;
+  }
+  
+  .flecha:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  button[type="submit"]:disabled {
+    background-color: #e50914;
+    cursor: not-allowed;
+  }
+  

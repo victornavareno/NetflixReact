@@ -1,39 +1,46 @@
-import React from "react";
+import React, { useState } from "react";
 import UsuarioBox from "./UsuarioBox";
-import styles from "../styles/Usuarios.css";
+import AgregarUsuario from "./AgregarUsuario";
+import "../styles/Usuarios.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 function Usuarios() {
+  const [mostrarFormulario, setMostrarFormulario] = useState(false);
+
   const usuarios = [
     {
       idUsuario: 1,
       nombre: "Victor",
-      imagen: "user1.jpg",
-      contenidosFavoritos: [1, 2, 3],
       rol: "administrador",
+      imagen: "user1.jpg",
+      favoritos: [1, 2, 3],
     },
     {
       idUsuario: 2,
       nombre: "Jesus",
-      imagen: "user2.jpg",
-      contenidosFavoritos: [4, 5, 6],
       rol: "cliente",
+      imagen: "user2.jpg",
+      favoritos: [1, 3, 2],
     },
     {
       idUsuario: 3,
-      nombre: "María",
-      imagen: "user3.jpg",
-      contenidosFavoritos: [7, 8, 9],
+      nombre: "Maria",
       rol: "cliente",
+      imagen: "user3.jpg",
+      favoritos: [1, 3, 5],
     },
     {
       idUsuario: 4,
-      nombre: "Jesus",
-      imagen: "user4.jpg",
-      contenidosFavoritos: [7, 10],
+      nombre: "Laura",
       rol: "cliente",
+      imagen: "user4.jpg",
+      favoritos: [4, 7, 8],
     },
   ];
+
+  const manejarAgregarUsuario = () => {
+    setMostrarFormulario(true);
+  };
 
   return (
     <div className="contenedor">
@@ -44,13 +51,20 @@ function Usuarios() {
             <UsuarioBox key={usuario.idUsuario} usuario={usuario} />
           ))}
           {/* Agregar Usuario Button */}
-          <div className="botonAgregar">
+          <div className="botonAgregar" onClick={manejarAgregarUsuario}>
             <i className="bi bi-plus-square-fill"></i>
             <p>Agregar Usuario</p>
           </div>
         </div>
         <button className="botonAdministrar">Administrar Usuarios</button>
       </div>
+
+      {/* Mostrar el formulario solo si mostrarFormulario es true */}
+      {mostrarFormulario && (
+        <div className="overlay">
+          <AgregarUsuario setMostrarFormulario={setMostrarFormulario} />
+        </div>
+      )}
     </div>
   );
 }
