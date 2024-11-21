@@ -10,7 +10,7 @@
 
 .usuarios{
     width: 70%;
-    height: 350px;
+    height: 100%;
     background-color: #252525;
     border-radius: 30px;
 
@@ -40,10 +40,12 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-bottom: 30px;
   }
   
   .botonAdministrar:hover {
     background-color: #555555;
+  
   }
   
   .botonAgregar {

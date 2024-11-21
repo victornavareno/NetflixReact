@@ -17,7 +17,6 @@ function AgregarUsuario({ setMostrarFormulario }) {
     "user4.jpg",
     "user5.jpg",
     "user6.jpg",
-    "user7.jpg",
   ];
 
   // Función para manejar el clic en la imagen
