@@ -3,6 +3,7 @@ import UsuarioBox from "./UsuarioBox";
 import AgregarUsuario from "./AgregarUsuario";
 import "../styles/Usuarios.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import AdministrarUsuarios from "./AdministrarUsuarios";
 
 function Usuarios() {
   const [usuarios, setUsuarios] = useState([]);
@@ -18,6 +19,9 @@ function Usuarios() {
       .then((data) => setUsuarios(data))
       .catch((error) => console.error("Error fetching usuarios:", error));
   }, []);
+
+  const [mostrarAdministrarUsuarios, setMostrarAdministrarUsuarios] =
+    useState(false);
 
   // Función para manejar el clic en un usuario
   const manejarSeleccionUsuario = (nombre) => {
@@ -65,7 +69,19 @@ function Usuarios() {
             <p>Agregar Usuario</p>
           </div>
         </div>
-        <button className="botonAdministrar">Administrar Usuarios</button>
+        <button
+          className="botonAdministrar"
+          onClick={() => setMostrarAdministrarUsuarios(true)}
+        >
+          Administrar Usuarios
+        </button>
+        {mostrarAdministrarUsuarios && (
+          <div className="overlay">
+            <AdministrarUsuarios
+              setMostrarAdministrarUsuarios={setMostrarAdministrarUsuarios}
+            />
+          </div>
+        )}
       </div>
 
       {/* Mostrar el mensaje de usuario seleccionado como overlay */}

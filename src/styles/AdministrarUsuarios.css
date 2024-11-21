@@ -1,0 +1,194 @@
+/* Estilos para la pantalla de administrar usuarios (inspirado en Netflix) */
+.administrarUsuarios {
+    background-color: #141414; /* Fondo oscuro similar al de Netflix */
+    padding: 30px;
+    border-radius: 10px;
+    width: 800px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7); /* Sombra sutil */
+    animation: fadeIn 0.3s ease-in-out; /* Animación para aparecer */
+    color: #fff; /* Texto blanco */
+  }
+  
+  .administrarUsuarios h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #fff;
+    font-size: 28px;
+  }
+  
+  .listaUsuarios {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .usuarioItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: #333; /* Fondo oscuro para los usuarios */
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    width: 120px;
+    text-align: center;
+  }
+  
+  .usuarioItem:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(255, 0, 0, 0.5); /* Sombra roja al pasar el mouse */
+  }
+  
+  .usuarioItem.seleccionado {
+    border: 2px solid #acacac; /* Borde rojo cuando está seleccionado */
+    box-shadow: 0 0 10px rgba(122, 122, 122, 0.6); /* Sombra roja */
+  }
+  
+  .imagenUsuario {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%; /* Forma redonda */
+    object-fit: cover;
+    margin-bottom: 10px;
+  }
+  
+  .editarUsuario {
+    margin-top: 0px;
+    padding-bottom: 30px;
+    border: 2px solid #606060;
+    border-radius: 10px;
+    background-color: #222;
+  }
+  
+  .editarUsuario h4 {
+    margin-bottom: 20px;
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .editarUsuario label {
+    font-size: 16px;
+    color: #ccc;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+  }
+  
+  .editarUsuario input {
+    width: 60%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+  }
+  
+  .editarUsuario input:focus {
+    border-color: #c1c1c1;
+    outline: none;
+  }
+  
+  .imagenesDisponibles {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .imagenDisponible {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .imagenDisponible:hover {
+    transform: scale(1.1);
+  }
+  
+  .imagenDisponible.seleccionada {
+    border-color: #e4e4e4;
+    box-shadow: 0 0 10px rgba(149, 149, 149, 0.6);
+  }
+  
+  .botonesEdicion {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .botonesEdicion button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    color: #fff;
+    transition: background-color 0.3s ease;
+  }
+  
+  .botonesEdicion button:nth-child(1) {
+    background-color: #3db700; /* Verde para actualizar */
+  }
+  
+  .botonesEdicion button:nth-child(1):hover {
+    background-color: #4de600;
+  }
+  
+  .botonesEdicion button:nth-child(2) {
+    background-color: #e50914; /* Rojo para eliminar */
+  }
+  
+  .botonesEdicion button:nth-child(2):hover {
+    background-color: #ff0a23;
+  }
+  
+  .botonesEdicion button:nth-child(3) {
+    background-color: #555; /* Gris para cancelar */
+  }
+  
+  .botonesEdicion button:nth-child(3):hover {
+    background-color: #777;
+  }
+  
+  .botonCerrar {
+    margin-top: 20px;
+    display: block;
+    padding: 10px 20px;
+    background-color: #e50914;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s;
+  }
+  
+  .botonCerrar:hover {
+    background-color: #ff0a23;
+  }
+  
+  /* Animación para el fade-in */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-50px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
