@@ -38,7 +38,7 @@ function App() {
     <Router>
       <div className="background">
         <header className="header">
-          <div >
+          <div className="logo">
             <NavigationHome />
           </div>
           <div className="header-buttons">
@@ -98,7 +98,11 @@ function NavigationHome() {
 
   return (
     <>
-      <img src={`/assets/img/Netflix.png`} alt="Netflix logo" onClick={() => navigate("/")} ></img>
+      <img
+        src={`/assets/img/Netflix.png`}
+        alt="Netflix logo"
+        onClick={() => navigate("/")}
+      ></img>
     </>
   );
 }

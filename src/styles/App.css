@@ -1,6 +1,6 @@
 /* General styling */
 .background {
-  background: linear-gradient(to bottom, rgb(19, 19, 19), rgb(27, 27, 27));
+  background: linear-gradient(to bottom, #141414, rgb(24, 24, 24));
   min-height: 1080px;
   display: grid;
   grid-template-rows: auto auto 1fr;
@@ -9,7 +9,22 @@
   padding-bottom: 5em;
 }
 
-/* Row 1: Header */
+.logo {
+  padding-top: 5px; 
+
+  display: flex; 
+  align-items: center; 
+  margin-left: 50px; 
+}
+
+.logo img {
+  width: 230px !important; /* CAMBIA EL TAMAÑO DEL LOGO DE NETFLIX */
+  height: auto; 
+  cursor: pointer; 
+  margin-top: 5px; 
+}
+
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -27,6 +42,8 @@
 }
 
 .header-buttons {
+  padding-top: 15px;
+  margin-right: 20px;
   display: flex;
   gap: 15px;
 }
@@ -75,18 +92,7 @@
   color: white;
 }
 
-/* Row 3: Main Content (Grid of Vistas) */
-/* .content {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-  padding: 20px;
-  overflow-y: auto;
-} */
-
-/* Individual Vista styling */
 .vista {
-  
   background-color: rgb(31, 31, 31);
   padding-top: 3px;
   padding-left: 10px;
