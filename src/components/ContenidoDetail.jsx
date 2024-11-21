@@ -145,61 +145,76 @@ function ContenidoDetail() {
               {cargandoTemporadas && <p>Cargando temporadas...</p>}
               {mostrarTemporadas && (
                 <div>
-                  {temporadas && 
-                    temporadas.length > 0 ? 
-                    (temporadas.map((temporada) => (
-                    <div key={temporada.idtemporada}>
-                      <div className="contenido-temporadas">
-                        <h3>Temporada {temporada.numero}</h3>
-                        <button
-                          className="contenido-button episodios"
-                          onClick={() =>
-                            handleShowEpisodios(
-                              contenido.id_contenido,
-                              temporada.numero
-                            )
-                          }
-                        >
-                          {mostrarEpisodios[temporada.numero]
-                            ? "Ocultar Episodios"
-                            : "Ver Episodios"}
-                        </button>
-                      </div>
-                      {mostrarEpisodios[temporada.numero] ? (
-                        <div>
-                          {cargandoEpisodios && <p>Cargando episodios...</p>}
-                          {mostrarEpisodios[temporada.numero] && (
-                            <div className="contenido-episodios">
-                                {episodios[temporada.numero] && 
-                                  episodios[temporada.numero].length > 0 ? 
-                                  (episodios[temporada.numero].map((episodio) => (
-                                  <div key={episodio.id_episodio} className="contenido-episodios-box" onClick={handleReproducir}>
-                                    <div className="contenido-episodio-image">
-                                      {/* <img src={contenido.imagen || "placeholder.jpg"} alt={contenido.titulo} /> */}
-                                      {/* <img src="/assets/img/FRIENDS.jpg" alt="Breaking Bad" /> */}
-                                      {/* IMPORTANTE: HAY QUE ESTANDARIZAR EL NOMBRE DE 'IMAGEN' EN LA BASE DE DATOS */}
-                                      <img
-                                        src={`/assets/img/${contenido.imagen}`}
-                                        alt={`${contenido.imagen}`}
-                                      />
-                                    </div>
-                                    <div className="contenido-episodios-box-info">
-                                      <div className="info-ep">
-                                        <p>{episodio.numero}</p>
-                                        <p>{episodio.duracion} min</p>
-                                      </div>
-                                      <div className="info-ep-titulo">
-                                        <p>{episodio.titulo}</p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                ))) : <span className="contenido-vacio">Aún no hay episodios</span> }
-                            </div>
-                          )}
+                  {temporadas && temporadas.length > 0 ? (
+                    temporadas.map((temporada) => (
+                      <div key={temporada.idtemporada}>
+                        <div className="contenido-temporadas">
+                          <h3>Temporada {temporada.numero}</h3>
+                          <button
+                            className="contenido-button episodios"
+                            onClick={() =>
+                              handleShowEpisodios(
+                                contenido.id_contenido,
+                                temporada.numero
+                              )
+                            }
+                          >
+                            {mostrarEpisodios[temporada.numero]
+                              ? "Ocultar Episodios"
+                              : "Ver Episodios"}
+                          </button>
                         </div>
-                      ) : null}
-                    </div>
-                  ))) : <span className="contenido-vacio">Aún no hay temporadas</span> }
+                        {mostrarEpisodios[temporada.numero] ? (
+                          <div>
+                            {cargandoEpisodios && <p>Cargando episodios...</p>}
+                            {mostrarEpisodios[temporada.numero] && (
+                              <div className="contenido-episodios">
+                                {episodios[temporada.numero] &&
+                                episodios[temporada.numero].length > 0 ? (
+                                  episodios[temporada.numero].map(
+                                    (episodio) => (
+                                      <div
+                                        key={episodio.id_episodio}
+                                        className="contenido-episodios-box"
+                                        onClick={handleReproducir}
+                                      >
+                                        <div className="contenido-episodio-image">
+                                          {/* <img src={contenido.imagen || "placeholder.jpg"} alt={contenido.titulo} /> */}
+                                          {/* <img src="/assets/img/FRIENDS.jpg" alt="Breaking Bad" /> */}
+                                          {/* IMPORTANTE: HAY QUE ESTANDARIZAR EL NOMBRE DE 'IMAGEN' EN LA BASE DE DATOS */}
+                                          <img
+                                            src={`/assets/img/${contenido.imagen}`}
+                                            alt={`${contenido.imagen}`}
+                                          />
+                                        </div>
+                                        <div className="contenido-episodios-box-info">
+                                          <div className="info-ep-titulo">
+                                            <p>{episodio.titulo}</p>
+                                          </div>
+                                          <div className="info-ep">
+                                            <p>{episodio.numero}</p>
+                                            <p>{episodio.duracion} min</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    )
+                                  )
+                                ) : (
+                                  <span className="contenido-vacio">
+                                    Aún no hay episodios
+                                  </span>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        ) : null}
+                      </div>
+                    ))
+                  ) : (
+                    <span className="contenido-vacio">
+                      Aún no hay temporadas
+                    </span>
+                  )}
                 </div>
               )}
             </div>

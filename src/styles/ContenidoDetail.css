@@ -125,6 +125,7 @@
 
 .contenido-episodios-box-info p{
   margin: 0 !important;
+  margin-left: 15px !important;
 }
 
 .contenido-episodio-image img {
@@ -136,15 +137,19 @@
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.365);
 }
 
+
+.info-ep-titulo{
+  font-size: 1.2em;
+  padding-top: 5px;
+  color: #ffffff; /* Texto más tenue */
+}
+
 .info-ep{
+  color: #9d9d9d;
   display: flex;
   justify-content: space-between;
 }
 
-.info-ep-titulo{
-  padding-top: 1em;
-  color: #aaa; /* Texto más tenue */
-}
 
 .contenido-vacio{
   padding-left: 1em;
