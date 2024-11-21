@@ -22,14 +22,14 @@ body {
 }
 
 .logo {
-  padding-top: 5px; 
+  padding-top: 0px; 
   display: flex; 
   align-items: center; 
-  margin-left: 55px; 
+  margin-left: 60px; 
 }
 
 .logo img {
-  width: 220px !important; /* CAMBIA EL TAMAÑO DEL LOGO DE NETFLIX */
+  width: 200px !important; /* CAMBIA EL TAMAÑO DEL LOGO DE NETFLIX */
   height: auto; 
   cursor: pointer; 
   margin-top: 5px; 

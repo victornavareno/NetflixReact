@@ -51,11 +51,16 @@ function App() {
         <div>
           <main className="content">
             <Routes>
+              {/* si la vista esta vacia, no se muestra (contenidos.length va a ser 0 o menos) */}
               <Route
                 path="/"
-                element={vistas.map((vista) => (
-                  <Vista key={vista.id_vista} vista={vista} />
-                ))}
+                element={vistas
+                  .filter(
+                    (vista) => vista.contenidos && vista.contenidos.length > 0
+                  )
+                  .map((vista) => (
+                    <Vista key={vista.id_vista} vista={vista} />
+                  ))}
               />
               <Route path="/contenido/:id" element={<ContenidoDetail />} />{" "}
               {/* PAGINA DE DETALLE DE CONTENIDO */}
