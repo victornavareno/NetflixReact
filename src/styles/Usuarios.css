@@ -94,3 +94,37 @@
   align-items: center;
   z-index: 999; /* Asegura que el modal esté encima de todo */
 }
+
+.mensajeSeleccionado {
+  font-size: 20px !important;
+  margin-top: 0px;
+  padding: 10px;
+  /* background: linear-gradient(135deg, #8f0d0d, #ff000000); */
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+
+/* Estilo para el overlay del mensaje */
+.overlayMensaje {
+  position: fixed; /* Fija el mensaje a la pantalla */
+  top: 50%; /* Centrado vertical */
+  left: 50%; /* Centrado horizontal */
+  transform: translate(-50%, -50%); /* Ajuste preciso para centrar */
+  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro y transparente */
+  color: white;
+  padding: 20px 40px;
+  border-radius: 10px;
+  font-size: 18px;
+  z-index: 999; /* Asegura que el overlay esté encima de todo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  opacity: 1; /* Inicialmente visible */
+  transition: opacity 2s ease-out; /* Transición de desvanecimiento */
+}
+
+/* Clase para animar el fade-out */
+.fadeOut {
+  opacity: 0; /* Desaparece lentamente */
+}
+
