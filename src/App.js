@@ -87,7 +87,7 @@ function NavigationButtons() {
         className="login-button"
         onClick={() => navigate("/login")} // Navigate to login page
       >
-        Login
+        Usuarios
       </button>
     </>
   );
