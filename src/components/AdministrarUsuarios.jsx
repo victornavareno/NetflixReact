@@ -35,12 +35,9 @@ function AdministrarUsuarios({ setMostrarAdministrarUsuarios }) {
   // Función para manejar la eliminación de un usuario
   const eliminarUsuario = async (idUsuario) => {
     try {
-      const respuesta = await fetch(
-        `http://localhost:8081/usuario/{idUsuario}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const respuesta = await fetch(`/usuario/${idUsuario}`, {
+        method: "DELETE",
+      });
 
       if (respuesta.ok) {
         setUsuarios(
@@ -71,7 +68,7 @@ function AdministrarUsuarios({ setMostrarAdministrarUsuarios }) {
 
     try {
       const respuesta = await fetch(
-        `http://localhost:8081/usuario/${usuarioSeleccionado.idUsuario}`,
+        `/usuario/${usuarioSeleccionado.idUsuario}`,
         {
           method: "PUT",
           headers: {
