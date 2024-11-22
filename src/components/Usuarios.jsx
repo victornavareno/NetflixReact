@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
 import UsuarioBox from "./UsuarioBox";
 import AgregarUsuario from "./AgregarUsuario";
+import AdministrarUsuarios from "./AdministrarUsuarios";
 import "../styles/Usuarios.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 function Usuarios() {
   const [usuarios, setUsuarios] = useState([]);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const [mostrarAdministrarUsuarios, setMostrarAdministrarUsuarios] =
+    useState(false);
   const [mostrarMensaje, setMostrarMensaje] = useState(false);
   const [mensaje, setMensaje] = useState(""); // Para mostrar mensajes dinámicos
   const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
+    // Cargar usuarios desde la API
     fetch("http://localhost:8081/usuario")
       .then((response) => response.json())
       .then((data) => setUsuarios(data))
@@ -23,20 +27,30 @@ function Usuarios() {
     setMostrarMensaje(true); // Muestra el mensaje
     setFadeOut(false); // Reinicia la animación
 
-    // Inicia el fade-out después de 1.5 segundos
+    // Inicia el fade-out después de 2 segundos
     setTimeout(() => {
       setFadeOut(true);
     }, 2000);
   };
 
+  useEffect(() => {
+    if (fadeOut) {
+      // Ocultar el mensaje después de que termine el fade-out
+      const timer = setTimeout(() => {
+        setMostrarMensaje(false);
+      }, 1000); // Tiempo de espera adicional para completar la animación
+      return () => clearTimeout(timer); // Limpiar el timer
+    }
+  }, [fadeOut]);
+
   const agregarNuevoUsuario = (usuario) => {
-    setUsuarios((prevUsuarios) => [...prevUsuarios, usuario]); // Actualiza la lista
-    setMostrarFormulario(false); // Cierra el formulario
-    handleMostrarMensaje(`Usuario ${usuario.nombre} creado con éxito.`); // Llama a handleMostrarMensaje
+    setUsuarios((prevUsuarios) => [...prevUsuarios, usuario]); // Agregar el nuevo usuario a la lista
+    setMostrarFormulario(false); // Cerrar el formulario
+    handleMostrarMensaje(`Usuario ${usuario.nombre} creado con éxito.`); // Mostrar mensaje de éxito
   };
 
   const manejarSeleccionUsuario = (nombre) => {
-    handleMostrarMensaje(`Usuario seleccionado: ${nombre}`); // Llama a handleMostrarMensaje
+    handleMostrarMensaje(`Usuario seleccionado: ${nombre}`); // Mostrar mensaje de selección
   };
 
   return (
@@ -60,6 +74,20 @@ function Usuarios() {
             <p>Agregar Usuario</p>
           </div>
         </div>
+        <button
+          className="botonAdministrar"
+          onClick={() => setMostrarAdministrarUsuarios(true)}
+        >
+          Administrar Usuarios
+        </button>
+        {mostrarAdministrarUsuarios && (
+          <div className="overlay">
+            <AdministrarUsuarios
+              setMostrarAdministrarUsuarios={setMostrarAdministrarUsuarios}
+              mostrarMensaje={handleMostrarMensaje} // Pasa la función para mostrar mensajes
+            />
+          </div>
+        )}
       </div>
 
       {mostrarMensaje && (
