@@ -127,7 +127,6 @@ function AdministrarUsuarios({ setMostrarAdministrarUsuarios }) {
             <label>Nuevo Nombre:</label>
             <input
               type="text"
-              value={nuevoNombre}
               onChange={(e) => setNuevoNombre(e.target.value)}
             />
           </div>
