@@ -38,7 +38,7 @@ function Usuarios() {
       // Ocultar el mensaje después de que termine el fade-out
       const timer = setTimeout(() => {
         setMostrarMensaje(false);
-      }, 1000); // Tiempo de espera adicional para completar la animación
+      }, 2000); // Tiempo de espera adicional para completar la animación
       return () => clearTimeout(timer); // Limpiar el timer
     }
   }, [fadeOut]);
