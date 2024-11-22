@@ -3,52 +3,41 @@ import UsuarioBox from "./UsuarioBox";
 import AgregarUsuario from "./AgregarUsuario";
 import "../styles/Usuarios.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import AdministrarUsuarios from "./AdministrarUsuarios";
 
 function Usuarios() {
   const [usuarios, setUsuarios] = useState([]);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
-  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(""); // Estado para mostrar el nombre del usuario seleccionado
-  const [mostrarMensaje, setMostrarMensaje] = useState(false); // Estado para controlar la visibilidad del mensaje
-  const [fadeOut, setFadeOut] = useState(false); // Estado para aplicar el fade-out
+  const [mostrarMensaje, setMostrarMensaje] = useState(false);
+  const [mensaje, setMensaje] = useState(""); // Para mostrar mensajes dinámicos
+  const [fadeOut, setFadeOut] = useState(false);
 
   useEffect(() => {
-    // Fetch usuarios from API
     fetch("http://localhost:8081/usuario")
       .then((response) => response.json())
       .then((data) => setUsuarios(data))
       .catch((error) => console.error("Error fetching usuarios:", error));
   }, []);
 
-  const [mostrarAdministrarUsuarios, setMostrarAdministrarUsuarios] =
-    useState(false);
+  const handleMostrarMensaje = (texto) => {
+    setMensaje(texto); // Actualiza el texto del mensaje
+    setMostrarMensaje(true); // Muestra el mensaje
+    setFadeOut(false); // Reinicia la animación
 
-  // Función para manejar el clic en un usuario
-  const manejarSeleccionUsuario = (nombre) => {
-    setUsuarioSeleccionado(nombre);
-    setMostrarMensaje(true); // Mostrar el mensaje de selección
-    setFadeOut(false); // Reiniciar el fadeOut antes de iniciar la animación
-
-    // Después de 3 segundos, iniciar el fade-out
+    // Inicia el fade-out después de 1.5 segundos
     setTimeout(() => {
-      setFadeOut(true); // Aplicar fade-out
-    }, 1500);
+      setFadeOut(true);
+    }, 2000);
   };
 
-  // Función para manejar el clic en el botón "Agregar Usuario"
-  const manejarAgregarUsuario = () => {
-    setMostrarFormulario(true);
+  const agregarNuevoUsuario = (usuario) => {
+    setUsuarios((prevUsuarios) => [...prevUsuarios, usuario]); // Actualiza la lista
+    setMostrarFormulario(false); // Cierra el formulario
+    handleMostrarMensaje(`Usuario ${usuario.nombre} creado con éxito.`); // Llama a handleMostrarMensaje
   };
 
-  useEffect(() => {
-    if (fadeOut) {
-      // Después de 5 segundos (duración de la animación), ocultamos el mensaje
-      const timer = setTimeout(() => {
-        setMostrarMensaje(false);
-      }, 2000); // Tiempo para que la animación termine
-      return () => clearTimeout(timer); // Limpiar el timer cuando el componente se desmonte
-    }
-  }, [fadeOut]);
+  const manejarSeleccionUsuario = (nombre) => {
+    handleMostrarMensaje(`Usuario seleccionado: ${nombre}`); // Llama a handleMostrarMensaje
+  };
 
   return (
     <div className="contenedor">
@@ -58,43 +47,33 @@ function Usuarios() {
           {usuarios.map((usuario) => (
             <div
               key={usuario.idUsuario}
-              onClick={() => manejarSeleccionUsuario(usuario.nombre)} // Al hacer clic, actualizamos el estado
+              onClick={() => manejarSeleccionUsuario(usuario.nombre)}
             >
               <UsuarioBox usuario={usuario} />
             </div>
           ))}
-          {/* Agregar Usuario Button */}
-          <div className="botonAgregar" onClick={manejarAgregarUsuario}>
+          <div
+            className="botonAgregar"
+            onClick={() => setMostrarFormulario(true)}
+          >
             <i className="bi bi-plus-square-fill"></i>
             <p>Agregar Usuario</p>
           </div>
         </div>
-        <button
-          className="botonAdministrar"
-          onClick={() => setMostrarAdministrarUsuarios(true)}
-        >
-          Administrar Usuarios
-        </button>
-        {mostrarAdministrarUsuarios && (
-          <div className="overlay">
-            <AdministrarUsuarios
-              setMostrarAdministrarUsuarios={setMostrarAdministrarUsuarios}
-            />
-          </div>
-        )}
       </div>
 
-      {/* Mostrar el mensaje de usuario seleccionado como overlay */}
       {mostrarMensaje && (
         <div className={`overlayMensaje ${fadeOut ? "fadeOut" : ""}`}>
-          <p>Usuario seleccionado: {usuarioSeleccionado}</p>
+          <p>{mensaje}</p>
         </div>
       )}
 
-      {/* Mostrar el formulario solo si mostrarFormulario es true */}
       {mostrarFormulario && (
         <div className="overlay">
-          <AgregarUsuario setMostrarFormulario={setMostrarFormulario} />
+          <AgregarUsuario
+            setMostrarFormulario={setMostrarFormulario}
+            actualizarUsuarios={agregarNuevoUsuario}
+          />
         </div>
       )}
     </div>

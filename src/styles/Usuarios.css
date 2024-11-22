@@ -13,6 +13,7 @@
     height: 100%;
     background-color: #252525;
     border-radius: 30px;
+    padding-bottom: 30px;
 
 }
   
@@ -112,11 +113,11 @@
   top: 50%; /* Centrado vertical */
   left: 50%; /* Centrado horizontal */
   transform: translate(-50%, -50%); /* Ajuste preciso para centrar */
-  background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro y transparente */
+  background-color: rgba(10, 10, 10, 0.852); /* Fondo oscuro y transparente */
   color: white;
   padding: 20px 40px;
   border-radius: 10px;
-  font-size: 18px;
+  font-size: 25px;
   z-index: 999; /* Asegura que el overlay esté encima de todo */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   opacity: 1; /* Inicialmente visible */

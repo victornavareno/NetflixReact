@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import "../styles/AgregarUsuario.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
-function AgregarUsuario({ setMostrarFormulario }) {
+function AgregarUsuario({ setMostrarFormulario, actualizarUsuarios }) {
   const [nombre, setNombre] = useState("");
   const [imagen, setImagen] = useState("");
   const [rol] = useState("cliente");
   const [favoritos] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [successMessage, setSuccessMessage] = useState("");
 
   const imagenesDisponibles = [
     "user1.jpg",
@@ -51,6 +52,8 @@ function AgregarUsuario({ setMostrarFormulario }) {
       if (respuesta.ok) {
         const data = await respuesta.json();
         console.log("Usuario agregado con éxito:", data);
+        setSuccessMessage(`Usuario ${data.nombre} creado con éxito`);
+        actualizarUsuarios(data); // Actualiza la lista en el componente padre
       } else {
         const error = await respuesta.json();
         console.error("Error al agregar el usuario:", error);
@@ -58,23 +61,12 @@ function AgregarUsuario({ setMostrarFormulario }) {
     } catch (error) {
       console.error("Error en la solicitud:", error);
     }
-
-    setMostrarFormulario(false);
-  };
-
-  const moverIzquierda = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-  };
-
-  const moverDerecha = () => {
-    setCurrentIndex((prevIndex) =>
-      Math.min(prevIndex + 1, imagenesDisponibles.length - 4)
-    );
   };
 
   return (
     <div className="formularioAgregarUsuario">
       <h3>Agregar Nuevo Usuario</h3>
+      {successMessage && <div className="successMessage">{successMessage}</div>}
       <form onSubmit={manejarSubmit}>
         <div>
           <label>Nombre del Usuario:</label>
@@ -94,12 +86,11 @@ function AgregarUsuario({ setMostrarFormulario }) {
             <button
               type="button"
               className="flecha izquierda"
-              onClick={moverIzquierda}
+              onClick={() => setCurrentIndex((prev) => Math.max(prev - 1, 0))}
               disabled={currentIndex === 0}
             >
               <i className="bi bi-chevron-left"></i>
             </button>
-
             <div className="carouselImagenes">
               {imagenesDisponibles
                 .slice(currentIndex, currentIndex + 4)
@@ -119,11 +110,14 @@ function AgregarUsuario({ setMostrarFormulario }) {
                   </div>
                 ))}
             </div>
-
             <button
               type="button"
               className="flecha derecha"
-              onClick={moverDerecha}
+              onClick={() =>
+                setCurrentIndex((prev) =>
+                  Math.min(prev + 1, imagenesDisponibles.length - 4)
+                )
+              }
               disabled={currentIndex >= imagenesDisponibles.length - 4}
             >
               <i className="bi bi-chevron-compact-right"></i>
