@@ -3,6 +3,7 @@ import axios from "axios";
 import ContenidoBox from "./ContenidoBox"; // Importar el componente ContenidoBox
 import { useNavigate } from "react-router-dom"; // Importar useNavigate
 import "../styles/ContenidoList.css"; // Opcional: añadir estilos
+import API_CONFIG from "../config/api";
 
 function ContenidoList() {
   const [contenidos, setContenidos] = useState([]);
@@ -29,7 +30,7 @@ function ContenidoList() {
   useEffect(() => {
     // Realizar la solicitud al endpoint
     axios
-      .get("http://127.0.0.1:8080/contenido") // Cambia la URL según sea necesario
+      .get(API_CONFIG.CONTENIDOS) // Cambia la URL según sea necesario
       .then((response) => {
         setContenidos(response.data); // Guardar los contenidos en el estado
         setFilteredContenidos(response.data); // Inicialmente todos los contenidos están filtrados

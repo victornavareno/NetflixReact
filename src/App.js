@@ -11,6 +11,7 @@ import ContenidoDetail from "./components/ContenidoDetail";
 import ContenidoList from "./components/ContenidoList"; // muestra la lista de todos los contenidos en la base de datos
 import Usuarios from "./components/Usuarios"; // pagina de login pa usuario
 import "./styles/App.css";
+import API_CONFIG from "./config/api";
 
 function App() {
   document.title = "NETFLIX";
@@ -20,7 +21,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8082/vista")
+      .get(API_CONFIG.VISTAS)
       .then((response) => {
         setVistas(response.data);
         setLoading(false);

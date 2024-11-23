@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../styles/AdministrarUsuarios.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import API_CONFIG from "../config/api";
 
-function AdministrarUsuarios({ setMostrarAdministrarUsuarios }) {
-  const [usuarios, setUsuarios] = useState([]);
+function AdministrarUsuarios({ setMostrarAdministrarUsuarios, actualizarUsuarios, usuarios }) {
   const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
   const [nuevoNombre, setNuevoNombre] = useState("");
   const [nuevaImagen, setNuevaImagen] = useState("");
@@ -17,14 +17,6 @@ function AdministrarUsuarios({ setMostrarAdministrarUsuarios }) {
     "user6.jpg",
   ];
 
-  // Fetch usuarios al cargar el componente
-  useEffect(() => {
-    fetch("http://localhost:8081/usuario")
-      .then((response) => response.json())
-      .then((data) => setUsuarios(data))
-      .catch((error) => console.error("Error fetching usuarios:", error));
-  }, []);
-
   // Función para seleccionar un usuario
   const seleccionarUsuario = (usuario) => {
     setUsuarioSeleccionado(usuario);
@@ -33,21 +25,23 @@ function AdministrarUsuarios({ setMostrarAdministrarUsuarios }) {
   };
 
   // Función para manejar la eliminación de un usuario
-  const eliminarUsuario = async (idUsuario) => {
+  const eliminarUsuario = async (idusuario) => {
     try {
-      const respuesta = await fetch(`/usuario/${idUsuario}`, {
+      const respuesta = await fetch(`${API_CONFIG.USUARIOS}/${idusuario}`, {
         method: "DELETE",
       });
 
-      if (respuesta.ok) {
-        setUsuarios(
-          usuarios.filter((usuario) => usuario.idUsuario !== idUsuario)
-        );
-        setUsuarioSeleccionado(null);
-        console.log("Usuario eliminado con éxito.");
-      } else {
-        console.error("Error al eliminar el usuario.");
+      if (!respuesta.ok) {
+        const errorMensaje = await respuesta.text();
+        throw new Error(`Error del servidor: ${errorMensaje}`);
       }
+
+      actualizarUsuarios(
+        usuarios.filter((usuario) => usuario.idusuario !== idusuario)
+      );
+      setUsuarioSeleccionado(null);
+      console.log("Usuario eliminado con éxito.");
+
     } catch (error) {
       console.error("Error en la solicitud DELETE:", error);
     }
@@ -68,7 +62,7 @@ function AdministrarUsuarios({ setMostrarAdministrarUsuarios }) {
 
     try {
       const respuesta = await fetch(
-        `/usuario/${usuarioSeleccionado.idUsuario}`,
+        `${API_CONFIG.USUARIOS}/${usuarioSeleccionado.idusuario}`,
         {
           method: "PUT",
           headers: {
@@ -79,9 +73,9 @@ function AdministrarUsuarios({ setMostrarAdministrarUsuarios }) {
       );
 
       if (respuesta.ok) {
-        setUsuarios((prevUsuarios) =>
+        actualizarUsuarios((prevUsuarios) =>
           prevUsuarios.map((usuario) =>
-            usuario.idUsuario === usuarioSeleccionado.idUsuario
+            usuario.idusuario === usuarioSeleccionado.idusuario
               ? usuarioActualizado
               : usuario
           )
@@ -104,7 +98,7 @@ function AdministrarUsuarios({ setMostrarAdministrarUsuarios }) {
           <div
             key={usuario.idUsuario}
             className={`usuarioItem ${
-              usuarioSeleccionado?.idUsuario === usuario.idUsuario
+              usuarioSeleccionado?.idusuario === usuario.idusuario
                 ? "seleccionado"
                 : ""
             }`}
@@ -122,7 +116,7 @@ function AdministrarUsuarios({ setMostrarAdministrarUsuarios }) {
 
       {usuarioSeleccionado && (
         <div className="editarUsuario">
-          <h4>Editar Usuario</h4>
+          <h4>Editar Usuario {usuarioSeleccionado.nombre}</h4>
           <div>
             <label>Nuevo Nombre:</label>
             <input
@@ -149,7 +143,7 @@ function AdministrarUsuarios({ setMostrarAdministrarUsuarios }) {
           <div className="botonesEdicion">
             <button onClick={actualizarUsuario}>Actualizar</button>
             <button
-              onClick={() => eliminarUsuario(usuarioSeleccionado.idUsuario)}
+              onClick={() => eliminarUsuario(usuarioSeleccionado.idusuario)}
             >
               Eliminar Usuario
             </button>

@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "../styles/ContenidoDetail.css";
 import Reproductor from "./Reproductor";
+import API_CONFIG from "../config/api";
 
 function ContenidoDetail() {
   const { state } = useLocation();
@@ -29,7 +30,7 @@ function ContenidoDetail() {
 
       try {
         const respuesta = await axios.get(
-          `http://127.0.0.1:8080/contenido/${id_contenido}/Temporadas`
+          `${API_CONFIG.CONTENIDOS}/${id_contenido}/Temporadas`
         );
         setTemporadas(respuesta.data);
         setMostrarTemporadas(true);
@@ -60,7 +61,7 @@ function ContenidoDetail() {
 
       try {
         const respuesta = await axios.get(
-          `http://127.0.0.1:8080/contenido/${id_contenido}/${numero}/ListaEpisodios`
+          `${API_CONFIG.CONTENIDOS}/${id_contenido}/${numero}/ListaEpisodios`
         );
         setEpisodios((prevState) => ({
           ...prevState,

@@ -4,6 +4,7 @@ import AgregarUsuario from "./AgregarUsuario";
 import AdministrarUsuarios from "./AdministrarUsuarios";
 import "../styles/Usuarios.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import API_CONFIG from "../config/api";
 
 function Usuarios() {
   const [usuarios, setUsuarios] = useState([]);
@@ -16,7 +17,7 @@ function Usuarios() {
 
   useEffect(() => {
     // Cargar usuarios desde la API
-    fetch("http://localhost:8081/usuario")
+    fetch(API_CONFIG.USUARIOS)
       .then((response) => response.json())
       .then((data) => setUsuarios(data))
       .catch((error) => console.error("Error fetching usuarios:", error));
@@ -85,6 +86,8 @@ function Usuarios() {
             <AdministrarUsuarios
               setMostrarAdministrarUsuarios={setMostrarAdministrarUsuarios}
               mostrarMensaje={handleMostrarMensaje} // Pasa la función para mostrar mensajes
+              actualizarUsuarios={setUsuarios} // Pasa el setter para actualizar la lista
+              usuarios={usuarios} // Pasa la lista actual de usuarios              
             />
           </div>
         )}
