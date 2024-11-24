@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/AgregarUsuario.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import API_CONFIG from "../config/api";
 
 function AgregarUsuario({ setMostrarFormulario, actualizarUsuarios }) {
   const [nombre, setNombre] = useState("");
@@ -41,7 +42,7 @@ function AgregarUsuario({ setMostrarFormulario, actualizarUsuarios }) {
     console.log("Datos enviados al servidor:", nuevoUsuario);
 
     try {
-      const respuesta = await fetch("http://localhost:8081/usuario", {
+      const respuesta = await fetch(API_CONFIG.USUARIOS, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

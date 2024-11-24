@@ -63,4 +63,22 @@
   right: 10px;
 }
 
+.vista-vacia p{
+  color: #aaa; /* Texto más tenue */
+  margin: 0;
+  padding: 1em 0 1em 0.625em;
+  font-size: 0.9rem;
+}
+
+.editar-vista-button{
+  margin: 1.25em 0 1.875em 1.25em;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #333333;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
 

@@ -1,13 +1,15 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ContenidoBox from "./ContenidoBox";
 import "../styles/Vista.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 
 function Vista({ vista }) {
   const [currentIndex, setCurrentIndex] = useState(0);
-
+  const usuarioSeleccionado = JSON.parse(localStorage.getItem("usuarioSeleccionado"));
   const contenidosPorVista = 5; // Número de contenidos visibles por vista
   const totalVistas = Math.ceil(vista.contenidos.length / contenidosPorVista);
+  const navigate = useNavigate();
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
@@ -17,11 +19,16 @@ function Vista({ vista }) {
     setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, totalVistas - 1));
   };
 
+  const handleEditar = (id_vista) => {
+    navigate(`/administrarVistas/${id_vista}`, { state: { vista } }); // Redirige a la pantalla de edición
+  };
+
   return (
     <div className="vista">
       {/* AQUI SE MUESTRA EL NOMBRE DE LA VISTA */}
       <h2>{vista.nombre_vista}</h2>
-      <div className="carousel-container">
+      {vista.contenidos.length > 0  ? (
+        <div className="carousel-container">
         <button className="carousel-button prev" onClick={handlePrev}>
           <i class="bi bi-chevron-left"></i>
         </button>
@@ -46,7 +53,25 @@ function Vista({ vista }) {
         <button className="carousel-button next" onClick={handleNext}>
           <i class="bi bi-chevron-compact-right"></i>
         </button>
-      </div>
+        </div>
+      ) : (
+        <div className="vista-vacia">
+          {usuarioSeleccionado ? (
+              <p>{usuarioSeleccionado.nombre} aún no tiene contenidos favoritos</p>
+            ) : (
+              <p>Elige un usuario para ver la lista de favoritos</p>
+            )
+          }
+        </div>
+      )}
+      {usuarioSeleccionado && usuarioSeleccionado.rol === "administrador" ? (
+        <div>
+          <button className="editar-vista-button" onClick={() => handleEditar(vista.id_vista)}>
+            Editar
+          </button>
+        </div>
+      ) : null }
+      
     </div>
   );
 }

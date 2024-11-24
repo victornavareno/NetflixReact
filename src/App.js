@@ -11,16 +11,67 @@ import ContenidoDetail from "./components/ContenidoDetail";
 import ContenidoList from "./components/ContenidoList"; // muestra la lista de todos los contenidos en la base de datos
 import Usuarios from "./components/Usuarios"; // pagina de login pa usuario
 import "./styles/App.css";
+import API_CONFIG from "./config/api";
+import AdministrarVistas from "./components/AdministrarVistas";
 
 function App() {
   document.title = "NETFLIX";
   const [vistas, setVistas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(
+    JSON.parse(localStorage.getItem("usuarioSeleccionado"))
+  );
+  
+    // Resetear el localStorage al iniciar la aplicación
+  useEffect(() => {
+      // Eliminar el usuario almacenado en localStorage al cargar la aplicación
+      localStorage.removeItem("usuarioSeleccionado");
+      setUsuarioSeleccionado(null); // Resetear el estado
+      eliminarfavoritos();
+  }, []);
+
+  const eliminarfavoritos = async () => {
+    const borrarFavs = {
+      contenidos_ids: [],
+    };
+    try {
+      const respuesta = await fetch(`${API_CONFIG.VISTAS}/Favoritos`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(borrarFavs),
+      });
+
+      if (!respuesta.ok) {
+        const errorMensaje = await respuesta.text();
+        throw new Error(`Error del servidor: ${errorMensaje}`);
+      }
+      console.log("Lista de favoritos eliminada con éxito.");
+
+    } catch (error) {
+      console.error("Error en la solicitud DELETE:", error);
+    }
+  };
+
+  const cargarVistas = async () => {
+    try {
+        const respuesta = await fetch(`${API_CONFIG.VISTAS}`);
+        const data = await respuesta.json();
+        setVistas(data);
+    } catch (error) {
+        console.error("Error al cargar las vistas:", error);
+    }
+  };
+
+  useEffect(() => {
+    cargarVistas();
+  }, []);
 
   useEffect(() => {
     axios
-      .get("http://127.0.0.1:8082/vista")
+      .get(API_CONFIG.VISTAS)
       .then((response) => {
         setVistas(response.data);
         setLoading(false);
@@ -29,7 +80,7 @@ function App() {
         setError(err.message);
         setLoading(false);
       });
-  }, []);
+  }, [usuarioSeleccionado]);
 
   if (loading) return <p>Loading views...</p>;
   if (error) return <p>Error loading views: {error}</p>;
@@ -46,28 +97,43 @@ function App() {
           </div>
         </header>
         <div className="welcome-text">
-          <h2>Explora los mejores contenidos creados para ti</h2>
+          {usuarioSeleccionado ? (
+            <h2>Explora los mejores contenidos creados para ti: {usuarioSeleccionado.nombre}</h2>
+          ):(
+            <h2>Explora los mejores contenidos creados para ti: no hay usuario</h2>
+          )}
         </div>
         <div>
           <main className="content">
+            {usuarioSeleccionado && usuarioSeleccionado.rol === 'administrador' && (
+              <div className="welcome-text">
+                <h2>Bienvenido Administrador</h2>
+              </div>
+            )}
             <Routes>
-              {/* si la vista esta vacia, no se muestra (contenidos.length va a ser 0 o menos) */}
               <Route
                 path="/"
-                element={vistas
-                  .filter(
-                    (vista) => vista.contenidos && vista.contenidos.length > 0
-                  )
-                  .map((vista) => (
+                element={
+                  <>
+                  {usuarioSeleccionado && usuarioSeleccionado.rol === 'administrador' && (
+                    <div className="botonNuevaVista" 
+                      //  onClick={() => setMostrarFormulario(true)}
+                    >
+                      <p>Crear Nueva Vista</p>
+                    </div>
+                  )}
+                  {vistas.map((vista) => (
                     <Vista key={vista.id_vista} vista={vista} />
                   ))}
               />
-              <Route path="/contenido/:id" element={<ContenidoDetail />} />{" "}
+              <Route path="/contenido/:id" element={<ContenidoDetail setUsuarioSeleccionado={setUsuarioSeleccionado} />} />{" "}
               {/* PAGINA DE DETALLE DE CONTENIDO */}
               <Route path="/contenido" element={<ContenidoList />} />{" "}
               {/* PAGINA DE LISTA DE CONTENIDOS */}
-              <Route path="/login" element={<Usuarios />} />{" "}
+              <Route path="/login" element={<Usuarios setUsuarioSeleccionado={setUsuarioSeleccionado} />} />{" "}
               {/* PAGINA DE LOGIN */}
+              <Route path="/administrarVistas/:id" element={<AdministrarVistas cargarVistas={cargarVistas} />} />{" "}
+              {/* PAGINA DE EDITAR VISTA */}
             </Routes>
           </main>
         </div>
@@ -106,7 +172,7 @@ function NavigationHome() {
       <img
         src={`/assets/img/Netflix.png`}
         alt="Netflix logo"
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/", { replace: true })}
       ></img>
     </>
   );

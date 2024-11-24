@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "../styles/ContenidoDetail.css";
 import Reproductor from "./Reproductor";
+import API_CONFIG from "../config/api";
+import { FaHeart } from "react-icons/fa";
 
-function ContenidoDetail() {
+function ContenidoDetail({ setUsuarioSeleccionado }) {
   const { state } = useLocation();
   const contenido = state?.contenido;
   const [error, setError] = useState(null);
@@ -14,6 +16,87 @@ function ContenidoDetail() {
   const [mostrarEpisodios, setMostrarEpisodios] = React.useState(false);
   const [episodios, setEpisodios] = useState([]);
   const [cargandoEpisodios, setCargandoEpisodios] = useState(false);
+  const [usuarioSeleccionado] = useState(
+    JSON.parse(localStorage.getItem("usuarioSeleccionado"))
+  );
+  const [isFavorito, setIsFavorito] = useState(false);
+
+  useEffect(() => {
+    if (usuarioSeleccionado && contenido) {
+      setIsFavorito(
+        usuarioSeleccionado.contenidosfavoritos.includes(contenido.id_contenido)
+      );
+    }
+  }, [usuarioSeleccionado, contenido]);
+
+  const handleFavorito = async () => {
+    if (isFavorito) {
+      await eliminarFavorito();
+    } else {
+      await addFavorito();
+    }
+  };
+
+  const addFavorito = async () => {
+    try {
+      const response = await fetch(
+        `${API_CONFIG.USUARIOS}/${usuarioSeleccionado.idusuario}/${contenido.id_contenido}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(usuarioSeleccionado),
+        }
+      );
+      if (response.status === 200) {
+        setIsFavorito(true);
+        // Actualizar contenidosFavoritos en usuarioSeleccionado
+        setUsuarioSeleccionado(usuarioSeleccionado);
+        localStorage.setItem(
+          "usuarioSeleccionado",
+          JSON.stringify({
+            ...usuarioSeleccionado,
+            contenidosfavoritos: [
+              ...usuarioSeleccionado.contenidosfavoritos,
+              contenido.id_contenido,
+            ],
+          })
+        );
+      }
+    } catch (error) {
+      console.error("Error al añadir a favoritos:", error);
+      setError("No se pudo añadir a favoritos");
+    }
+  };
+
+  const eliminarFavorito = async () => {
+    try {
+      const response = await fetch(
+        `${API_CONFIG.USUARIOS}/${usuarioSeleccionado.idusuario}/${contenido.id_contenido}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (response.status === 200) {
+        setIsFavorito(false);
+        // Actualizar contenidosFavoritos en usuarioSeleccionado
+        setUsuarioSeleccionado(usuarioSeleccionado);
+        localStorage.setItem(
+          "usuarioSeleccionado",
+          JSON.stringify({
+            ...usuarioSeleccionado,
+            contenidosfavoritos: usuarioSeleccionado.contenidosfavoritos.filter(
+              (id) => id !== contenido.id_contenido
+            ),
+          })
+        );
+      }
+    } catch (error) {
+      console.error("Error al eliminar de favoritos:", error);
+      setError("No se pudo eliminar de favoritos");
+    }
+  };
 
   const handleShowTemporadas = async (id_contenido) => {
     if (mostrarTemporadas) {
@@ -29,7 +112,7 @@ function ContenidoDetail() {
 
       try {
         const respuesta = await axios.get(
-          `http://127.0.0.1:8080/contenido/${id_contenido}/Temporadas`
+          `${API_CONFIG.CONTENIDOS}/${id_contenido}/Temporadas`
         );
         setTemporadas(respuesta.data);
         setMostrarTemporadas(true);
@@ -60,7 +143,7 @@ function ContenidoDetail() {
 
       try {
         const respuesta = await axios.get(
-          `http://127.0.0.1:8080/contenido/${id_contenido}/${numero}/ListaEpisodios`
+          `${API_CONFIG.CONTENIDOS}/${id_contenido}/${numero}/ListaEpisodios`
         );
         setEpisodios((prevState) => ({
           ...prevState,
@@ -103,7 +186,21 @@ function ContenidoDetail() {
           <img src={`/assets/img/${contenido.imagen}`} alt={contenido.titulo} />
         </div>
         <div className="contenido-info">
-          <h1>{contenido.titulo}</h1>
+          <div className="contenido-data">
+            <h1>{contenido.titulo}</h1>
+            {usuarioSeleccionado ? (
+              <div className="Like">
+                <FaHeart
+                  size={45}
+                  color={isFavorito ? "white" : "gray"} // Cambia el color según el estado
+                  onClick={handleFavorito} // Llama a la función correspondiente
+                  style={{ cursor: "pointer" }} // Cambia el cursor para indicar que es clickeable
+                />
+              </div>
+            ) : (
+              <p>inicia sesion para poder añadir a favoritos</p>
+            )}
+          </div>
           <h2>{contenido.tipo}</h2>
           <p>
             <strong>Sinopsis:</strong> {contenido.sinopsis}
