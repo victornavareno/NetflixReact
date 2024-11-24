@@ -69,7 +69,7 @@ function App() {
                     <Vista key={vista.id_vista} vista={vista} />
                   ))}
               />
-              <Route path="/contenido/:id" element={<ContenidoDetail />} />{" "}
+              <Route path="/contenido/:id" element={<ContenidoDetail setUsuarioSeleccionado={setUsuarioSeleccionado} />} />{" "}
               {/* PAGINA DE DETALLE DE CONTENIDO */}
               <Route path="/contenido" element={<ContenidoList />} />{" "}
               {/* PAGINA DE LISTA DE CONTENIDOS */}
@@ -113,7 +113,7 @@ function NavigationHome() {
       <img
         src={`/assets/img/Netflix.png`}
         alt="Netflix logo"
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/", { replace: true })}
       ></img>
     </>
   );
