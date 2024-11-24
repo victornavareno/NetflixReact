@@ -27,7 +27,32 @@ function App() {
       // Eliminar el usuario almacenado en localStorage al cargar la aplicación
       localStorage.removeItem("usuarioSeleccionado");
       setUsuarioSeleccionado(null); // Resetear el estado
+      eliminarfavoritos();
   }, []);
+
+  const eliminarfavoritos = async () => {
+    const borrarFavs = {
+      contenidos_ids: [],
+    };
+    try {
+      const respuesta = await fetch(`${API_CONFIG.VISTAS}/Favoritos`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(borrarFavs),
+      });
+
+      if (!respuesta.ok) {
+        const errorMensaje = await respuesta.text();
+        throw new Error(`Error del servidor: ${errorMensaje}`);
+      }
+      console.log("Lista de favoritos eliminada con éxito.");
+
+    } catch (error) {
+      console.error("Error en la solicitud DELETE:", error);
+    }
+  };
 
   useEffect(() => {
     axios
@@ -57,7 +82,11 @@ function App() {
           </div>
         </header>
         <div className="welcome-text">
-          <h2>Explora los mejores contenidos creados para ti</h2>
+          {usuarioSeleccionado ? (
+            <h2>Explora los mejores contenidos creados para ti: {usuarioSeleccionado.nombre}</h2>
+          ):(
+            <h2>Explora los mejores contenidos creados para ti: no hay usuario</h2>
+          )}
         </div>
         <div>
           <main className="content">
