@@ -61,6 +61,11 @@ function App() {
         </div>
         <div>
           <main className="content">
+            {usuarioSeleccionado && usuarioSeleccionado.rol === 'administrador' && (
+              <div className="welcome-text">
+                <h2>Bienvenido Administrador</h2>
+              </div>
+            )}
             <Routes>
               <Route
                 path="/"
