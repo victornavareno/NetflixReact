@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ContenidoBox from "./ContenidoBox";
 import "../styles/Vista.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
@@ -6,9 +7,9 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 function Vista({ vista }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const usuarioSeleccionado = JSON.parse(localStorage.getItem("usuarioSeleccionado"));
-
   const contenidosPorVista = 5; // Número de contenidos visibles por vista
   const totalVistas = Math.ceil(vista.contenidos.length / contenidosPorVista);
+  const navigate = useNavigate();
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) => Math.max(prevIndex - 1, 0));
@@ -16,6 +17,10 @@ function Vista({ vista }) {
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) => Math.min(prevIndex + 1, totalVistas - 1));
+  };
+
+  const handleEditar = (id_vista) => {
+    navigate(`/administrarVistas/${id_vista}`, { state: { vista } }); // Redirige a la pantalla de edición
   };
 
   return (
@@ -59,7 +64,14 @@ function Vista({ vista }) {
           }
         </div>
       )}
-
+      {usuarioSeleccionado && usuarioSeleccionado.rol === "administrador" ? (
+        <div>
+          <button className="editar-vista-button" onClick={() => handleEditar(vista.id_vista)}>
+            Editar
+          </button>
+        </div>
+      ) : null }
+      
     </div>
   );
 }

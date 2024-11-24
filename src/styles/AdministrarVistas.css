@@ -1,0 +1,90 @@
+.editarVista {
+    margin: auto;
+    width: 75%;
+    padding: 30px;
+    border: 2px solid #606060;
+    border-radius: 10px;
+    background-color: #222;
+}
+
+.editarVista h4 {
+    font-size: 30px;
+    color: #fff;
+    text-align: center;
+}
+  
+.editarVista label {
+    font-size: 16px;
+    color: #ccc;
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+}
+  
+.editarVista input {
+    width: 60%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+}
+  
+.editarVista input:focus {
+    border-color: #c1c1c1;
+    outline: none;
+}
+
+.contenidosVista{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.contenidosVista-element{
+    width: 150px;
+    height: 200px;
+    text-align: center; 
+    border: 1px solid #6c6c6c;
+    border-radius: 1em;
+    margin: 0 1em 1em 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.contenidosVista-element-titulo{
+    margin: auto;
+    color: #aaa
+}
+
+.contenidosVista img {
+    width: 100%;
+    height: 75px;
+    object-fit:cover;
+    /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, #393939 100%); */
+
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.365);
+}
+
+.agregarContenido-Button, .eliminarContenido-Button{
+    background-color: #333;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    margin-left: 1em;
+}
+
+.eliminarContenido-Button{
+    margin: 0 !important;
+}
+
+.agregarContenido-Button:hover, .eliminarContenido-Button:hover {
+    background-color: #555; /* Color ligeramente más claro u oscuro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave alrededor */
+}

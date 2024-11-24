@@ -12,6 +12,7 @@ import ContenidoList from "./components/ContenidoList"; // muestra la lista de t
 import Usuarios from "./components/Usuarios"; // pagina de login pa usuario
 import "./styles/App.css";
 import API_CONFIG from "./config/api";
+import AdministrarVistas from "./components/AdministrarVistas";
 
 function App() {
   document.title = "NETFLIX";
@@ -53,6 +54,20 @@ function App() {
       console.error("Error en la solicitud DELETE:", error);
     }
   };
+
+  const cargarVistas = async () => {
+    try {
+        const respuesta = await fetch(`${API_CONFIG.VISTAS}`);
+        const data = await respuesta.json();
+        setVistas(data);
+    } catch (error) {
+        console.error("Error al cargar las vistas:", error);
+    }
+  };
+
+  useEffect(() => {
+    cargarVistas();
+  }, []);
 
   useEffect(() => {
     axios
@@ -109,6 +124,8 @@ function App() {
               {/* PAGINA DE LISTA DE CONTENIDOS */}
               <Route path="/login" element={<Usuarios setUsuarioSeleccionado={setUsuarioSeleccionado} />} />{" "}
               {/* PAGINA DE LOGIN */}
+              <Route path="/administrarVistas/:id" element={<AdministrarVistas cargarVistas={cargarVistas} />} />{" "}
+              {/* PAGINA DE EDITAR VISTA */}
             </Routes>
           </main>
         </div>
