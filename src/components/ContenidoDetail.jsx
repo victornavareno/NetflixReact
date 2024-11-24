@@ -6,7 +6,6 @@ import Reproductor from "./Reproductor";
 import API_CONFIG from "../config/api";
 import { FaHeart } from "react-icons/fa";
 
-
 function ContenidoDetail({ setUsuarioSeleccionado }) {
   const { state } = useLocation();
   const contenido = state?.contenido;
@@ -28,7 +27,7 @@ function ContenidoDetail({ setUsuarioSeleccionado }) {
         usuarioSeleccionado.contenidosfavoritos.includes(contenido.id_contenido)
       );
     }
-  }, [usuarioSeleccionado, contenido]); 
+  }, [usuarioSeleccionado, contenido]);
 
   const handleFavorito = async () => {
     if (isFavorito) {
@@ -40,23 +39,28 @@ function ContenidoDetail({ setUsuarioSeleccionado }) {
 
   const addFavorito = async () => {
     try {
-      const response = await fetch(`${API_CONFIG.USUARIOS}/${usuarioSeleccionado.idusuario}/${contenido.id_contenido}`,{
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(usuarioSeleccionado),
-      }
+      const response = await fetch(
+        `${API_CONFIG.USUARIOS}/${usuarioSeleccionado.idusuario}/${contenido.id_contenido}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(usuarioSeleccionado),
+        }
       );
       if (response.status === 200) {
         setIsFavorito(true);
         // Actualizar contenidosFavoritos en usuarioSeleccionado
-        setUsuarioSeleccionado(usuarioSeleccionado)
+        setUsuarioSeleccionado(usuarioSeleccionado);
         localStorage.setItem(
           "usuarioSeleccionado",
           JSON.stringify({
             ...usuarioSeleccionado,
-            contenidosfavoritos: [...usuarioSeleccionado.contenidosfavoritos, contenido.id_contenido],
+            contenidosfavoritos: [
+              ...usuarioSeleccionado.contenidosfavoritos,
+              contenido.id_contenido,
+            ],
           })
         );
       }
@@ -68,14 +72,16 @@ function ContenidoDetail({ setUsuarioSeleccionado }) {
 
   const eliminarFavorito = async () => {
     try {
-      const response = await fetch(`${API_CONFIG.USUARIOS}/${usuarioSeleccionado.idusuario}/${contenido.id_contenido}`,{
-        method: "DELETE",
-      }
+      const response = await fetch(
+        `${API_CONFIG.USUARIOS}/${usuarioSeleccionado.idusuario}/${contenido.id_contenido}`,
+        {
+          method: "DELETE",
+        }
       );
       if (response.status === 200) {
         setIsFavorito(false);
         // Actualizar contenidosFavoritos en usuarioSeleccionado
-        setUsuarioSeleccionado(usuarioSeleccionado)
+        setUsuarioSeleccionado(usuarioSeleccionado);
         localStorage.setItem(
           "usuarioSeleccionado",
           JSON.stringify({
@@ -179,37 +185,39 @@ function ContenidoDetail({ setUsuarioSeleccionado }) {
         <div className="contenido-detail-image">
           <img src={`/assets/img/${contenido.imagen}`} alt={contenido.titulo} />
         </div>
-          <div className="contenido-info">
-            <div className="contenido-data">
-              <h1>{contenido.titulo}</h1>
-              {usuarioSeleccionado ? (
-                <div>
-                  <FaHeart
-                    size={24}
-                    color={isFavorito ? "red" : "gray"} // Cambia el color según el estado
-                    onClick={handleFavorito} // Llama a la función correspondiente
-                    style={{ cursor: "pointer" }} // Cambia el cursor para indicar que es clickeable
-                  />
-                </div>
-              ) : <p>inicia sesion para poder añadir a favoritos</p> }
-            </div>
-            <h2>{contenido.tipo}</h2>
-            <p>
-              <strong>Sinopsis:</strong> {contenido.sinopsis}
-            </p>
-            <p>
-              <strong>Director:</strong> {contenido.director}
-            </p>
-            <p>
-              <strong>Elenco:</strong> {contenido.elenco}
-            </p>
-            <p>
-              <strong>Duración:</strong> {contenido.duracion} min
-            </p>
-            <p>
-              <strong>Género:</strong> {contenido.genero}
-            </p>
+        <div className="contenido-info">
+          <div className="contenido-data">
+            <h1>{contenido.titulo}</h1>
+            {usuarioSeleccionado ? (
+              <div className="Like">
+                <FaHeart
+                  size={45}
+                  color={isFavorito ? "white" : "gray"} // Cambia el color según el estado
+                  onClick={handleFavorito} // Llama a la función correspondiente
+                  style={{ cursor: "pointer" }} // Cambia el cursor para indicar que es clickeable
+                />
+              </div>
+            ) : (
+              <p>inicia sesion para poder añadir a favoritos</p>
+            )}
           </div>
+          <h2>{contenido.tipo}</h2>
+          <p>
+            <strong>Sinopsis:</strong> {contenido.sinopsis}
+          </p>
+          <p>
+            <strong>Director:</strong> {contenido.director}
+          </p>
+          <p>
+            <strong>Elenco:</strong> {contenido.elenco}
+          </p>
+          <p>
+            <strong>Duración:</strong> {contenido.duracion} min
+          </p>
+          <p>
+            <strong>Género:</strong> {contenido.genero}
+          </p>
+        </div>
         <div className="contenido-actions">
           {isSerie ? (
             <button
