@@ -18,6 +18,16 @@ function App() {
   const [vistas, setVistas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(
+    JSON.parse(localStorage.getItem("usuarioSeleccionado"))
+  );
+  
+    // Resetear el localStorage al iniciar la aplicación
+  useEffect(() => {
+      // Eliminar el usuario almacenado en localStorage al cargar la aplicación
+      localStorage.removeItem("usuarioSeleccionado");
+      setUsuarioSeleccionado(null); // Resetear el estado
+  }, []);
 
   useEffect(() => {
     axios
@@ -30,7 +40,7 @@ function App() {
         setError(err.message);
         setLoading(false);
       });
-  }, []);
+  }, [usuarioSeleccionado]);
 
   if (loading) return <p>Loading views...</p>;
   if (error) return <p>Error loading views: {error}</p>;
@@ -52,13 +62,9 @@ function App() {
         <div>
           <main className="content">
             <Routes>
-              {/* si la vista esta vacia, no se muestra (contenidos.length va a ser 0 o menos) */}
               <Route
                 path="/"
                 element={vistas
-                  .filter(
-                    (vista) => vista.contenidos && vista.contenidos.length > 0
-                  )
                   .map((vista) => (
                     <Vista key={vista.id_vista} vista={vista} />
                   ))}
@@ -67,7 +73,7 @@ function App() {
               {/* PAGINA DE DETALLE DE CONTENIDO */}
               <Route path="/contenido" element={<ContenidoList />} />{" "}
               {/* PAGINA DE LISTA DE CONTENIDOS */}
-              <Route path="/login" element={<Usuarios />} />{" "}
+              <Route path="/login" element={<Usuarios setUsuarioSeleccionado={setUsuarioSeleccionado} />} />{" "}
               {/* PAGINA DE LOGIN */}
             </Routes>
           </main>

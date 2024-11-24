@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import UsuarioBox from "./UsuarioBox";
 import AgregarUsuario from "./AgregarUsuario";
 import AdministrarUsuarios from "./AdministrarUsuarios";
@@ -6,7 +7,7 @@ import "../styles/Usuarios.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import API_CONFIG from "../config/api";
 
-function Usuarios() {
+function Usuarios({ setUsuarioSeleccionado }) {
   const [usuarios, setUsuarios] = useState([]);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
   const [mostrarAdministrarUsuarios, setMostrarAdministrarUsuarios] =
@@ -14,6 +15,7 @@ function Usuarios() {
   const [mostrarMensaje, setMostrarMensaje] = useState(false);
   const [mensaje, setMensaje] = useState(""); // Para mostrar mensajes dinámicos
   const [fadeOut, setFadeOut] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Cargar usuarios desde la API
@@ -50,8 +52,31 @@ function Usuarios() {
     handleMostrarMensaje(`Usuario ${usuario.nombre} creado con éxito.`); // Mostrar mensaje de éxito
   };
 
-  const manejarSeleccionUsuario = (nombre) => {
-    handleMostrarMensaje(`Usuario seleccionado: ${nombre}`); // Mostrar mensaje de selección
+  const manejarSeleccionUsuario = async (usuario) => {
+    handleMostrarMensaje(`Usuario seleccionado: ${usuario.nombre}`); // Mostrar mensaje de selección
+    try {
+      const respuesta = await fetch(
+        `${API_CONFIG.USUARIOS}/${usuario.idusuario}/Login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(usuario),
+        }
+      );
+
+      if (respuesta.ok) {
+        setUsuarioSeleccionado(usuario)
+        localStorage.setItem("usuarioSeleccionado", JSON.stringify(usuario));
+        console.log("Sesión de usuario iniciada con éxito.");
+      } else {
+        console.error("Error al iniciar sesión del usuario.");
+      }
+    } catch (error) {
+      console.error("Error en la solicitud Post:", error);
+    }
+    navigate("/", { replace: true })
   };
 
   return (
@@ -62,7 +87,7 @@ function Usuarios() {
           {usuarios.map((usuario) => (
             <div
               key={usuario.idUsuario}
-              onClick={() => manejarSeleccionUsuario(usuario.nombre)}
+              onClick={() => manejarSeleccionUsuario(usuario)}
             >
               <UsuarioBox usuario={usuario} />
             </div>

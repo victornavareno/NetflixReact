@@ -5,6 +5,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 
 function Vista({ vista }) {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const usuarioSeleccionado = JSON.parse(localStorage.getItem("usuarioSeleccionado"));
 
   const contenidosPorVista = 5; // Número de contenidos visibles por vista
   const totalVistas = Math.ceil(vista.contenidos.length / contenidosPorVista);
@@ -21,7 +22,8 @@ function Vista({ vista }) {
     <div className="vista">
       {/* AQUI SE MUESTRA EL NOMBRE DE LA VISTA */}
       <h2>{vista.nombre_vista}</h2>
-      <div className="carousel-container">
+      {vista.contenidos.length > 0  ? (
+        <div className="carousel-container">
         <button className="carousel-button prev" onClick={handlePrev}>
           <i class="bi bi-chevron-left"></i>
         </button>
@@ -46,7 +48,18 @@ function Vista({ vista }) {
         <button className="carousel-button next" onClick={handleNext}>
           <i class="bi bi-chevron-compact-right"></i>
         </button>
-      </div>
+        </div>
+      ) : (
+        <div className="vista-vacia">
+          {usuarioSeleccionado ? (
+              <p>{usuarioSeleccionado.nombre} aún no tiene contenidos favoritos</p>
+            ) : (
+              <p>Elige un usuario para ver la lista de favoritos</p>
+            )
+          }
+        </div>
+      )}
+
     </div>
   );
 }
