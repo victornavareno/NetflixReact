@@ -113,8 +113,16 @@ function App() {
             <Routes>
               <Route
                 path="/"
-                element={vistas
-                  .map((vista) => (
+                element={
+                  <>
+                  {usuarioSeleccionado && usuarioSeleccionado.rol === 'administrador' && (
+                    <div className="botonNuevaVista" 
+                      //  onClick={() => setMostrarFormulario(true)}
+                    >
+                      <p>Crear Nueva Vista</p>
+                    </div>
+                  )}
+                  {vistas.map((vista) => (
                     <Vista key={vista.id_vista} vista={vista} />
                   ))}
               />
