@@ -34,9 +34,15 @@ Este proyecto es una aplicación frontend desarrollada en **React**. La finalida
 ## Instalación y Uso
 
 1. Clona este repositorio en tu máquina local.
-2. Navega a la carpeta raíz del proyecto.
-3. Instala los archivos necesarios ejecutando:
+   ```bash
+   git clone https://github.com/victornavareno/NetflixReact
+3. Navega a la carpeta raíz del proyecto.
+4. Instala los archivos necesarios ejecutando:
 
    ```bash
    npm install
-- **`npm start`**: Inicia el servidor de desarrollo.
+5. Inicia el servidor de desarrollo.
+   ```bash
+   npm start
+
+  #### Authors: Víctor Navareño, Jesús, María Soledad y Jesús 
