@@ -4,7 +4,12 @@
 
 ## Descripción
 
-Este proyecto es una aplicación frontend desarrollada en **React** como parte de una entrega para el curso de **Arquitecturas de Software en Entornos Empresariales**. La finalidad es aprender a implementar y consumir microservicios como se hace en la mayoría de entornos empresariales modernos.
+Este proyecto es una aplicación frontend desarrollada en **React**. La finalidad es aprender a implementar y consumir microservicios como se hace en la mayoría de entornos empresariales modernos. En el backend, está conectada a 3 microservicios diferentes escritas en Python y utilizando Flask y SQLAlchemy.
+
+#### Microservicios que consume el frontend (APIs):
+- Usuarios
+- Contenidos
+- Usuarios
 
 ## Características
 
