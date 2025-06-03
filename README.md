@@ -27,7 +27,7 @@ Este proyecto es una aplicación frontend desarrollada en **React**. La finalida
   - **`App.js`**: Componente principal de la aplicación.
 - **`package.json`**: Configuración del proyecto y dependencias.
 
-## Funcionalidad de Inicio de Sesión
+## Funcionalidad de Creación de Usuario
 
 ![image](https://github.com/user-attachments/assets/273410e4-f0e0-4a14-9872-523c57e713a1)
 
