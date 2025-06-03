@@ -9,7 +9,7 @@ Este proyecto es una aplicación frontend desarrollada en **React**. La finalida
 #### Microservicios que consume el frontend (APIs):
 - Usuarios
 - Contenidos
-- Usuarios
+- Recomendaciones (Array de contenidos)
 
 ## Características
 
