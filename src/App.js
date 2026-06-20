@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
-  BrowserRouter as Router,
   Routes,
   Route,
   useNavigate,
+  useLocation,
 } from "react-router-dom";
 import Vista from "./components/Vista";
 import ContenidoDetail from "./components/ContenidoDetail";
@@ -13,22 +13,25 @@ import Usuarios from "./components/Usuarios"; // pagina de login pa usuario
 import "./styles/App.css";
 import API_CONFIG from "./config/api";
 import AdministrarVistas from "./components/AdministrarVistas";
+import CrearVista from "./components/CrearVista";
+import CrearContenido from "./components/CrearContenido";
+import CrearEpisodio from "./components/CrearEpisodio";
+import ScrollToTop from "./components/ScrollToTop";
+import EditarContenido from "./components/EditarContenido";
 
 function App() {
   document.title = "NETFLIX";
+  const location = useLocation();
   const [vistas, setVistas] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(
-    JSON.parse(localStorage.getItem("usuarioSeleccionado"))
-  );
-  
-    // Resetear el localStorage al iniciar la aplicación
+  const [usuarioSeleccionado, setUsuarioSeleccionado] = useState(null);
+
+  // Resetear el localStorage al iniciar la aplicación
   useEffect(() => {
-      // Eliminar el usuario almacenado en localStorage al cargar la aplicación
-      localStorage.removeItem("usuarioSeleccionado");
-      setUsuarioSeleccionado(null); // Resetear el estado
-      eliminarfavoritos();
+    localStorage.removeItem("usuarioSeleccionado"); // Eliminar el usuario almacenado en localStorage al cargar la aplicación
+    setUsuarioSeleccionado(null); // Resetear el estado
+    eliminarfavoritos();
   }, []);
 
   const eliminarfavoritos = async () => {
@@ -49,27 +52,12 @@ function App() {
         throw new Error(`Error del servidor: ${errorMensaje}`);
       }
       console.log("Lista de favoritos eliminada con éxito.");
-
     } catch (error) {
       console.error("Error en la solicitud DELETE:", error);
     }
   };
 
   const cargarVistas = async () => {
-    try {
-        const respuesta = await fetch(`${API_CONFIG.VISTAS}`);
-        const data = await respuesta.json();
-        setVistas(data);
-    } catch (error) {
-        console.error("Error al cargar las vistas:", error);
-    }
-  };
-
-  useEffect(() => {
-    cargarVistas();
-  }, []);
-
-  useEffect(() => {
     axios
       .get(API_CONFIG.VISTAS)
       .then((response) => {
@@ -80,70 +68,109 @@ function App() {
         setError(err.message);
         setLoading(false);
       });
-  }, [usuarioSeleccionado]);
+  };
+
+  useEffect(() => {
+    cargarVistas();
+    if (location.state?.reload) {
+      cargarVistas();
+    }
+  }, [usuarioSeleccionado, location.state]);
 
   if (loading) return <p>Loading views...</p>;
   if (error) return <p>Error loading views: {error}</p>;
 
   return (
-    <Router>
       <div className="background">
         <header className="header">
           <div className="logo">
             <NavigationHome />
           </div>
           <div className="header-buttons">
-            <NavigationButtons />
+            <NavigationContenidos/>
+            <NavigationUsuarios 
+              usuario={!!usuarioSeleccionado} 
+              usuarioSeleccionado={usuarioSeleccionado} 
+            />
+            
           </div>
         </header>
         <div className="welcome-text">
-          {usuarioSeleccionado ? (
-            <h2>Explora los mejores contenidos creados para ti: {usuarioSeleccionado.nombre}</h2>
-          ):(
-            <h2>Explora los mejores contenidos creados para ti: no hay usuario</h2>
-          )}
+          <h2>
+            Explora los mejores contenidos creados para ti
+          </h2>
         </div>
         <div>
           <main className="content">
-            {usuarioSeleccionado && usuarioSeleccionado.rol === 'administrador' && (
-              <div className="welcome-text">
-                <h2>Bienvenido Administrador</h2>
-              </div>
-            )}
+            {usuarioSeleccionado &&
+              usuarioSeleccionado.rol === "administrador" && (
+                <div>
+                  <div className="welcome-text">
+                    <h2>Bienvenido Administrador</h2>
+                  </div>
+                </div>
+              )}
+            <ScrollToTop />
             <Routes>
               <Route
                 path="/"
                 element={
                   <>
-                  {usuarioSeleccionado && usuarioSeleccionado.rol === 'administrador' && (
-                    <div className="botonNuevaVista" 
-                      //  onClick={() => setMostrarFormulario(true)}
-                    >
-                      <p>Crear Nueva Vista</p>
-                    </div>
-                  )}
-                  {vistas.map((vista) => (
-                    <Vista key={vista.id_vista} vista={vista} />
-                  ))}
+                    {usuarioSeleccionado && usuarioSeleccionado.rol === 'administrador' && (
+                      <div>
+                        <NavigationCrearVista />
+                      </div>
+                    )}
+                    {vistas.map((vista) => (
+                      <Vista key={vista.id_vista} vista={vista} />
+                    ))}
+                  </>
+                }
               />
-              <Route path="/contenido/:id" element={<ContenidoDetail setUsuarioSeleccionado={setUsuarioSeleccionado} />} />{" "}
+              <Route
+                path="/contenido/:id"
+                element={
+                  <ContenidoDetail
+                    setUsuarioSeleccionado={setUsuarioSeleccionado}
+                  />
+                }
+              />{" "}
               {/* PAGINA DE DETALLE DE CONTENIDO */}
               <Route path="/contenido" element={<ContenidoList />} />{" "}
               {/* PAGINA DE LISTA DE CONTENIDOS */}
-              <Route path="/login" element={<Usuarios setUsuarioSeleccionado={setUsuarioSeleccionado} />} />{" "}
+              <Route
+                path="/login"
+                element={
+                  <Usuarios setUsuarioSeleccionado={setUsuarioSeleccionado} />
+                }
+              />{" "}
               {/* PAGINA DE LOGIN */}
-              <Route path="/administrarVistas/:id" element={<AdministrarVistas cargarVistas={cargarVistas} />} />{" "}
+              <Route
+                path="/administrarVistas/:id"
+                element={<AdministrarVistas cargarVistas={cargarVistas} />}
+              />{" "}
               {/* PAGINA DE EDITAR VISTA */}
+              <Route
+                path="/crearVista"
+                element={<CrearVista cargarVistas={cargarVistas} />}
+              />{" "}
+              {/* PAGINA DE CREAR VISTA */}
+              <Route path="/crearContenido" element={<CrearContenido />} />{" "}
+              {/* PAGINA DE CREAR CONTENIDO */}
+              <Route path="/contenido/:id/editar" element={<EditarContenido />} />{" "}
+              {/* PAGINA DE EDITAR CONTENIDO */} 
+              <Route path="/contenido/:id/crearEpisodio" element={<CrearEpisodio />} />{" "}
+              {/* PAGINA DE CREAR EPISODIO */}              
             </Routes>
           </main>
         </div>
       </div>
-    </Router>
   );
 }
 
-// aqui vamos a añadir las funcionalidades para navegacion por botones
-function NavigationButtons() {
+// funcionalidades para navegacion por botones
+
+function NavigationContenidos() {
   const navigate = useNavigate();
 
   return (
@@ -154,12 +181,32 @@ function NavigationButtons() {
       >
         Contenidos
       </button>
-      <button
-        className="login-button"
-        onClick={() => navigate("/login")} // Navigate to login page
-      >
-        Usuarios
-      </button>
+    </>
+  );
+}
+
+function NavigationUsuarios({usuario, usuarioSeleccionado}) {
+  const navigate = useNavigate();
+
+  return (
+    <>
+      <div>
+      {usuario ? (
+        <button
+          className="login-button"
+          onClick={() => navigate("/login")} // Navigate to login page
+        >
+          Hola {usuarioSeleccionado?.nombre}
+        </button>
+      ) : (      
+        <button
+          className="login-button"
+          onClick={() => navigate("/login")} // Navigate to login page
+        >
+          Usuarios
+        </button>
+      )}
+      </div>
     </>
   );
 }
@@ -174,6 +221,27 @@ function NavigationHome() {
         alt="Netflix logo"
         onClick={() => navigate("/", { replace: true })}
       ></img>
+    </>
+  );
+}
+
+function NavigationCrearVista() {
+  const navigate = useNavigate();
+
+  return (
+    <>
+      <button
+        className="botonNuevaVista"
+        onClick={() => navigate("/crearVista")}
+      >
+        Crear Vista
+      </button>
+      <button
+        className="botonNuevoContenido"
+        onClick={() => navigate("/crearContenido")}
+      >
+        Crear Contenido
+      </button>
     </>
   );
 }
