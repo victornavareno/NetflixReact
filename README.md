@@ -1,4 +1,4 @@
-# NetflixReact
+# Project Preview
 ![image](https://github.com/user-attachments/assets/e19a65fb-e738-4044-b64c-5c295c8756bf)
 
 
