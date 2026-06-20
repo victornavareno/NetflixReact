@@ -4,7 +4,7 @@
 
 ## Description
 
-This project is a frontend application developed in React. The purpose is to learn how to implement and consume microservices as is done in most modern enterprise environments. On the backend, it is connected to 3 different microservices written in Python using Flask and SQLAlchemy.
+This project is a frontend application developed in React. The purpose is to implement and consume microservices as is done in most modern enterprise environments. On the backend, it is connected to 3 different microservices written in Python using Flask and SQLAlchemy.
 
 #### Microservices consumed by the frontend (APIs):
 - Users
