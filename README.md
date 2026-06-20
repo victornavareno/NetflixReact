@@ -2,46 +2,43 @@
 ![image](https://github.com/user-attachments/assets/e19a65fb-e738-4044-b64c-5c295c8756bf)
 
 
-## Descripción
+## Description
 
-Este proyecto es una aplicación frontend desarrollada en **React**. La finalidad es aprender a implementar y consumir microservicios como se hace en la mayoría de entornos empresariales modernos. En el backend, está conectada a 3 microservicios diferentes escritas en Python y utilizando Flask y SQLAlchemy.
+This project is a frontend application developed in React. The purpose is to learn how to implement and consume microservices as is done in most modern enterprise environments. On the backend, it is connected to 3 different microservices written in Python using Flask and SQLAlchemy.
 
-#### Microservicios que consume el frontend (APIs):
-- Usuarios
-- Contenidos
-- Recomendaciones (Array de contenidos)
+#### Microservices consumed by the frontend (APIs):
+- Users
+- Content
+- Recommendations (Array of content)
+  
+## Features
 
-## Características
+- Use of microservices for data management and retrieval, specifically: Users, Content, and Views.
+- Implementation of proprietary modular and reusable React components.
+- Use of libraries like Axios for API consumption.
+- Built-in styling with Bootstrap.
 
-- Uso de microservicios para la gestión y recuperación de datos, concretamente: Usuarios, Contenidos y Vistas
-- Implementación de componentes modulares y reutilizables propios de React.
-- Uso de bibliotecas como Axios para el consumo de APIs.
-- Estilos incorporados con **Bootstrap**.
-
-## Estructura del Proyecto
-
-- **`public/`**: Archivos estáticos y plantilla HTML principal.
-- **`src/`**: Contiene los componentes React, estilos, y servicios.
-  - **`components/`**: Componentes reutilizables de la UI.
+## Project Structure
+- **`public/`**: Static files and main HTML template.
+- **`src/`**: Contains React components, styles, and services.
+  - **`components/`**: Reusable UI components.
   - **`services/`**: Módulos para la integración con microservicios.
-  - **`App.js`**: Componente principal de la aplicación.
-- **`package.json`**: Configuración del proyecto y dependencias.
+  - **`App.js`**: Main application component.
+- **`package.json`**: Project configuration and dependencies.
 
-## Funcionalidad de Creación de Usuario
-
+## User Management Preview
 ![image](https://github.com/user-attachments/assets/273410e4-f0e0-4a14-9872-523c57e713a1)
 
-## Instalación y Uso
-
-1. Clona este repositorio en tu máquina local.
+## Installation and Usage
+1. Clone this repository on your local machine:
    ```bash
    git clone https://github.com/victornavareno/NetflixReact
-3. Navega a la carpeta raíz del proyecto.
-4. Instala los archivos necesarios ejecutando:
-
+   
+2. Install the necessary files by running:
    ```bash
    npm install
-5. Inicia el servidor de desarrollo.
+   
+5. Start the development front server:
    ```bash
    npm start
 
